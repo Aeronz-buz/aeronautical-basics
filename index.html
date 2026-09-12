@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeronautical Engineering — Technical Reference</title>
+<style>
+:root{
+  --bg:#101318;
+  --panel:#191e25;
+  --panel2:#20262e;
+  --paper:#f1eee3;
+  --ink:#191a17;
+  --text:#e7e4da;
+  --muted:#9299a3;
+  --orange:#e85d2c;
+  --teal:#3fa9a4;
+  --line:rgba(231,228,218,.14);
+  --grid:rgba(231,228,218,.055);
+  --radius:4px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;color:var(--text);background:
+  linear-gradient(var(--grid) 1px,transparent 1px) 0 0/48px 48px,
+  linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/48px 48px,
+  var(--bg);
+  font-family:Inter,Arial,sans-serif;line-height:1.65;
+}
+nav{
+  position:sticky;top:0;z-index:100;display:flex;align-items:center;
+  gap:24px;padding:13px 24px;background:rgba(16,19,24,.94);
+  backdrop-filter:blur(8px);border-bottom:1px solid var(--line);overflow-x:auto
+}
+.brand{font:bold 14px monospace;white-space:nowrap;color:var(--orange)}
+.navlinks{display:flex;gap:4px;min-width:max-content}
+.navlinks a{color:var(--muted);text-decoration:none;padding:7px 10px;font-size:13px}
+.navlinks a:hover,.navlinks a.active{color:var(--text);background:var(--panel2)}
+.navlinks a::before{content:attr(data-n);font:11px monospace;color:var(--orange);margin-right:6px}
+main{max-width:1180px;margin:auto;padding:0 28px}
+.hero{min-height:620px;display:grid;grid-template-columns:1fr 1fr;gap:55px;align-items:center;padding:80px 0}
+.kicker{font:12px monospace;letter-spacing:2px;color:var(--teal);text-transform:uppercase}
+h1{font-size:clamp(42px,6vw,76px);line-height:1.02;margin:14px 0 22px;letter-spacing:-3px}
+.hero p{max-width:650px;color:#b9bec6;font-size:18px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.stat{border:1px solid var(--line);padding:10px 14px;background:rgba(25,30,37,.7)}
+.stat b{display:block;font:18px monospace;color:var(--orange)}
+.stat span{font-size:11px;color:var(--muted)}
+.aircraft{background:var(--panel);border:1px solid var(--line);padding:20px}
+.aircraft svg{width:100%;height:auto}
+.section{padding:75px 0;border-top:1px solid var(--line);scroll-margin-top:70px}
+.section-head{display:flex;align-items:center;gap:15px;margin-bottom:38px}
+.index{font:14px monospace;color:var(--orange);border:1px solid var(--orange);padding:4px 8px}
+h2{font-size:32px;margin:0;letter-spacing:-1px}
+.rule{height:1px;background:var(--line);flex:1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+.diagram{background:var(--panel);border:1px solid var(--line);padding:22px;min-height:280px;display:flex;align-items:center;justify-content:center}
+.diagram svg{width:100%;height:auto;max-height:330px}
+.copy h3{font-size:22px;margin-top:0}
+.copy p{color:#b9bec6}
+.formula{background:var(--paper);color:var(--ink);padding:20px;margin:20px 0;border-left:4px solid var(--orange)}
+.formula .name{font:12px monospace;text-transform:uppercase;letter-spacing:1px;color:#60635e}
+.eq{font:26px Georgia,serif;margin:7px 0}
+.terms{font-size:13px;color:#555850}
+.tag{display:inline-block;font:11px monospace;color:var(--teal);border:1px solid var(--teal);padding:3px 7px;margin:4px 4px 4px 0}
+.process{position:relative}
+.step{display:grid;grid-template-columns:58px 1fr;gap:18px;position:relative;padding-bottom:28px}
+.step:not(:last-child)::after{content:"";position:absolute;left:28px;top:58px;bottom:0;width:1px;background:var(--line)}
+.num{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--line);background:var(--panel2);font:16px monospace;color:var(--orange);z-index:1}
+.step h3{margin:0 0 5px}
+.step p{margin:0;color:var(--muted)}
+.calc{background:var(--panel);border:1px solid var(--line);padding:25px}
+.tabs{display:flex;gap:5px;margin-bottom:20px;flex-wrap:wrap}
+.tabs button{background:var(--panel2);border:1px solid var(--line);color:var(--muted);padding:10px 15px;cursor:pointer}
+.tabs button.active{color:var(--text);border-color:var(--orange)}
+.calcgrid{display:grid;grid-template-columns:1fr 1fr;gap:25px}
+.pane{display:none}.pane.active{display:block}
+label{display:block;font:12px monospace;color:var(--muted);margin:12px 0 5px}
+input{width:100%;padding:12px;background:#11151a;color:var(--text);border:1px solid var(--line);font-size:16px}
+.result{margin-top:20px;padding:20px;background:var(--paper);color:var(--ink)}
+.result strong{font:30px monospace}
+footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);font-size:13px}
+@media(max-width:800px){
+  main{padding:0 17px}
+  nav{padding:11px 14px}
+  .hero,.grid,.calcgrid{grid-template-columns:1fr}
+  .hero{padding:55px 0;min-height:auto}
+  h1{letter-spacing:-2px}
+  .section{padding:55px 0}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">AERO · REF</div>
+  <div class="navlinks">
+    <a href="#intro" data-n="00">Introduction</a>
+    <a href="#aero" data-n="01">Aerodynamics</a>
+    <a href="#structures" data-n="02">Structures</a>
+    <a href="#propulsion" data-n="03">Propulsion</a>
+    <a href="#flight" data-n="04">Flight Mechanics</a>
+    <a href="#controls" data-n="05">Flight Control</a>
+    <a href="#materials" data-n="06">Materials</a>
+    <a href="#maintenance" data-n="07">Maintenance</a>
+    <a href="#process" data-n="08">Solving Process</a>
+    <a href="#calculator" data-n="09">Calculator</a>
+  </div>
+</nav>
+
+<main>
+<section class="hero" id="intro">
+  <div>
+    <div class="kicker">Aeronautical Engineering · Technical Reference</div>
+    <h1>Aircraft.<br>Engineering.<br>Explained.</h1>
+    <p>A compact technical reference for students and teachers covering aerodynamics, structures, propulsion, flight mechanics, control systems and aircraft maintenance.</p>
+    <div class="stats">
+      <div class="stat"><b>07</b><span>CORE TOPICS</span></div>
+      <div class="stat"><b>10</b><span>REFERENCE SECTIONS</span></div>
+      <div class="stat"><b>∞</b><span>EXTENDABLE</span></div>
+    </div>
+  </div>
+  <div class="aircraft">
+    <svg viewBox="0 0 600 360" role="img" aria-label="Technical aircraft sketch">
+      <g fill="none" stroke="#9299a3" stroke-width="2">
+        <path d="M65 190 L180 182 L280 145 L520 154 L555 178 L520 198 L300 201 L180 210 Z"/>
+        <path d="M280 145 L225 78 L250 75 L345 150"/>
+        <path d="M300 201 L235 275 L260 280 L350 205"/>
+        <path d="M465 154 L500 102 L520 106 L515 157"/>
+        <path d="M465 198 L500 244 L518 239 L512 196"/>
+        <path d="M80 190 L42 177 M80 190 L42 204"/>
+      </g>
+      <g fill="none" stroke="#e85d2c" stroke-width="2">
+        <path d="M40 125 Q300 65 560 125"/>
+        <path d="M40 255 Q300 315 560 255"/>
+      </g>
+      <g fill="#3fa9a4" font-family="monospace" font-size="13">
+        <text x="48" y="115">LIFT</text><text x="475" y="145">TAIL</text>
+        <text x="245" y="65">WING</text><text x="365" y="235">FUSELAGE</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section class="section" id="aero">
+<div class="section-head"><span class="index">01</span><h2>Aerodynamics</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <path d="M45 190 Q150 80 430 145 Q455 151 430 160 Q170 190 45 205 Z" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <path d="M20 125 Q180 65 455 105 M20 155 Q180 100 455 135 M20 225 Q180 260 455 205" fill="none" stroke="#3fa9a4"/>
+ <path d="M270 160 L270 75" stroke="#e85d2c" stroke-width="3"/>
+ <polygon points="270,70 264,82 276,82" fill="#e85d2c"/>
+ <text x="285" y="88" fill="#e85d2c" font-family="monospace">LIFT</text>
+ <path d="M45 198 L5 198" stroke="#e85d2c" stroke-width="3"/>
+ <text x="5" y="185" fill="#e85d2c" font-family="monospace">DRAG</text>
+</svg>
+</div>
+<div class="copy">
+<h3>Forces on an aircraft</h3>
+<p>Aircraft performance is strongly influenced by lift, drag, thrust and weight. The wing generates aerodynamic lift as air moves around its geometry.</p>
+<div class="formula"><div class="name">Lift equation</div><div class="eq">L = ½ ρ V² S C<sub>L</sub></div><div class="terms"><b>ρ</b> density · <b>V</b> velocity · <b>S</b> wing area · <b>C<sub>L</sub></b> lift coefficient</div></div>
+<span class="tag">Lift</span><span class="tag">Drag</span><span class="tag">Airfoil</span><span class="tag">Mach</span>
+</div>
+</div>
+</section>
+
+<section class="section" id="structures">
+<div class="section-head"><span class="index">02</span><h2>Aircraft Structures</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="copy">
+<h3>Loads, stress and structural integrity</h3>
+<p>Aircraft structures carry aerodynamic, inertial and landing loads. Structural analysis helps ensure adequate strength, stiffness and safety.</p>
+<div class="formula"><div class="name">Normal stress</div><div class="eq">σ = P / A</div><div class="terms"><b>σ</b> normal stress · <b>P</b> axial load · <b>A</b> cross-sectional area</div></div>
+<span class="tag">Stress</span><span class="tag">Strain</span><span class="tag">Bending</span><span class="tag">Torsion</span>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <line x1="60" y1="150" x2="150" y2="150" stroke="#9299a3" stroke-width="7"/>
+ <rect x="150" y="105" width="190" height="90" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <line x1="340" y1="150" x2="440" y2="150" stroke="#9299a3" stroke-width="7"/>
+ <path d="M85 120 L45 150 L85 180" fill="none" stroke="#e85d2c" stroke-width="3"/>
+ <path d="M415 120 L455 150 L415 180" fill="none" stroke="#e85d2c" stroke-width="3"/>
+ <text x="215" y="155" fill="#3fa9a4" font-family="monospace">MEMBER</text>
+ <text x="45" y="105" fill="#e85d2c" font-family="monospace">P →</text>
+ <text x="395" y="105" fill="#e85d2c" font-family="monospace">← P</text>
+</svg>
+</div>
+</div>
+</section>
+
+<section class="section" id="propulsion">
+<div class="section-head"><span class="index">03</span><h2>Propulsion</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <rect x="100" y="105" width="260" height="90" rx="45" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <circle cx="155" cy="150" r="32" fill="none" stroke="#3fa9a4" stroke-width="3"/>
+ <path d="M187 150 H325" stroke="#e85d2c" stroke-width="4"/>
+ <path d="M325 150 L300 135 M325 150 L300 165" stroke="#e85d2c" stroke-width="4"/>
+ <text x="115" y="85" fill="#9299a3" font-family="monospace">AIR INTAKE</text>
+ <text x="275" y="220" fill="#e85d2c" font-family="monospace">THRUST →</text>
+</svg>
+</div>
+<div class="copy">
+<h3>Producing thrust</h3>
+<p>Aircraft propulsion systems convert chemical or electrical energy into useful propulsive force. Gas turbines use compression, combustion and expansion to produce high-speed exhaust flow.</p>
+<div class="formula"><div class="name">Simple thrust relation</div><div class="eq">T ≈ ṁ (V<sub>e</sub> − V<sub>0</sub>)</div><div class="terms"><b>ṁ</b> mass flow rate · <b>V<sub>e</sub></b> exit velocity · <b>V<sub>0</sub></b> flight velocity</div></div>
+<span class="tag">Turbojet</span><span class="tag">Turbofan</span><span class="tag">Ramjet</span><span class="tag">Propeller</span>
+</div>
+</div>
+</section>
+
+<section class="section" id="flight">
+<div class="section-head"><span class="index">04</span><h2>Flight Mechanics</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="copy">
+<h3>Understanding aircraft motion</h3>
+<p>Flight mechanics studies aircraft equilibrium, performance and motion. The aircraft is commonly described using longitudinal and lateral-directional motion.</p>
+<div class="formula"><div class="name">Load factor</div><div class="eq">n = L / W</div><div class="terms"><b>n</b> load factor · <b>L</b> lift · <b>W</b> aircraft weight</div></div>
+<span class="tag">Stability</span><span class="tag">Performance</span><span class="tag">Trim</span><span class="tag">Maneuver</span>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <line x1="250" y1="60" x2="250" y2="240" stroke="#9299a3"/>
+ <line x1="100" y1="150" x2="400" y2="150" stroke="#9299a3"/>
+ <circle cx="250" cy="150" r="65" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <path d="M250 70 L240 90 L260 90 Z" fill="#e85d2c"/>
+ <path d="M330 150 L310 140 L310 160 Z" fill="#3fa9a4"/>
+ <text x="265" y="80" fill="#e85d2c" font-family="monospace">Z / PITCH</text>
+ <text x="335" y="140" fill="#3fa9a4" font-family="monospace">X / YAW</text>
+ <text x="185" y="155" fill="#9299a3" font-family="monospace">AIRCRAFT</text>
+</svg>
+</div>
+</div>
+</section>
+
+<section class="section" id="controls">
+<div class="section-head"><span class="index">05</span><h2>Flight Control Systems</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <circle cx="105" cy="150" r="38" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <line x1="143" y1="150" x2="220" y2="150" stroke="#9299a3" stroke-width="4"/>
+ <rect x="220" y="115" width="100" height="70" fill="none" stroke="#3fa9a4" stroke-width="3"/>
+ <line x1="320" y1="150" x2="400" y2="105" stroke="#9299a3" stroke-width="4"/>
+ <path d="M400 105 L450 105" stroke="#e85d2c" stroke-width="6"/>
+ <text x="70" y="220" fill="#9299a3" font-family="monospace">PILOT</text>
+ <text x="235" y="155" fill="#3fa9a4" font-family="monospace">CONTROL</text>
+ <text x="365" y="85" fill="#e85d2c" font-family="monospace">SURFACE</text>
+</svg>
+</div>
+<div class="copy">
+<h3>From pilot input to aircraft response</h3>
+<p>Flight control systems transmit pilot or automatic-control commands to aerodynamic control surfaces such as elevators, ailerons and rudders.</p>
+<div class="formula"><div class="name">Basic feedback concept</div><div class="eq">e(t) = r(t) − y(t)</div><div class="terms"><b>e</b> error · <b>r</b> reference input · <b>y</b> measured output</div></div>
+<span class="tag">Mechanical</span><span class="tag">Hydraulic</span><span class="tag">Fly-by-wire</span><span class="tag">Autopilot</span>
+</div>
+</div>
+</section>
+
+<section class="section" id="materials">
+<div class="section-head"><span class="index">06</span><h2>Aircraft Materials</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="copy">
+<h3>Materials for strength and weight efficiency</h3>
+<p>Aircraft materials are selected considering strength-to-weight ratio, fatigue, corrosion, temperature capability, manufacturability and cost.</p>
+<div class="formula"><div class="name">Specific strength</div><div class="eq">Specific strength = Strength / Density</div><div class="terms">Useful for comparing lightweight structural materials.</div></div>
+<span class="tag">Aluminium</span><span class="tag">Titanium</span><span class="tag">Composites</span><span class="tag">Superalloys</span>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <rect x="70" y="70" width="105" height="160" fill="none" stroke="#9299a3" stroke-width="3"/>
+ <rect x="198" y="95" width="105" height="135" fill="none" stroke="#3fa9a4" stroke-width="3"/>
+ <rect x="326" y="115" width="105" height="115" fill="none" stroke="#e85d2c" stroke-width="3"/>
+ <text x="88" y="255" fill="#9299a3" font-family="monospace">AL</text>
+ <text x="215" y="255" fill="#3fa9a4" font-family="monospace">TI</text>
+ <text x="338" y="255" fill="#e85d2c" font-family="monospace">CFRP</text>
+</svg>
+</div>
+</div>
+</section>
+
+<section class="section" id="maintenance">
+<div class="section-head"><span class="index">07</span><h2>Aircraft Maintenance</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <circle cx="250" cy="150" r="90" fill="none" stroke="#e7e4da" stroke-width="3"/>
+ <path d="M250 65 V235 M165 105 H335 M180 195 H320" stroke="#9299a3" stroke-width="2"/>
+ <path d="M250 150 L320 105" stroke="#e85d2c" stroke-width="4"/>
+ <circle cx="250" cy="150" r="12" fill="#3fa9a4"/>
+ <text x="185" y="275" fill="#9299a3" font-family="monospace">INSPECT → RECORD → RECTIFY</text>
+</svg>
+</div>
+<div class="copy">
+<h3>Airworthiness and reliability</h3>
+<p>Aircraft maintenance includes inspection, servicing, repair, overhaul and documentation. Proper maintenance supports continued airworthiness and operational safety.</p>
+<div class="formula"><div class="name">Maintenance principle</div><div class="eq">Inspect → Assess → Rectify → Record</div><div class="terms">Always follow the applicable approved maintenance data and procedures.</div></div>
+<span class="tag">AMM</span><span class="tag">CMM</span><span class="tag">SRM</span><span class="tag">IPC</span><span class="tag">MRO</span>
+</div>
+</div>
+</section>
+
+<section class="section" id="process">
+<div class="section-head"><span class="index">08</span><h2>Solving Process</h2><span class="rule"></span></div>
+<div class="process">
+ <div class="step"><div class="num">01</div><div><h3>Define the problem</h3><p>Identify the aircraft component, operating condition, known data and required output.</p></div></div>
+ <div class="step"><div class="num">02</div><div><h3>Idealize the system</h3><p>Prepare a clear sketch, free-body diagram or aerodynamic model and state assumptions.</p></div></div>
+ <div class="step"><div class="num">03</div><div><h3>Select the governing equation</h3><p>Choose the appropriate mechanics, aerodynamic, propulsion or control relationship.</p></div></div>
+ <div class="step"><div class="num">04</div><div><h3>Substitute consistent units</h3><p>Convert quantities into a consistent unit system before calculating.</p></div></div>
+ <div class="step"><div class="num">05</div><div><h3>Check the result</h3><p>Verify units, magnitude, physical meaning and whether the result is reasonable.</p></div></div>
+</div>
+</section>
+
+<section class="section" id="calculator">
+<div class="section-head"><span class="index">09</span><h2>Engineering Calculator</h2><span class="rule"></span></div>
+<div class="calc">
+<div class="tabs">
+<button class="active" data-tab="lift">Lift</button>
+<button data-tab="stress">Stress</button>
+<button data-tab="bending">Bending Stress</button>
+</div>
+
+<div class="pane active" data-pane="lift">
+<div class="calcgrid">
+<div>
+<label>Air density ρ (kg/m³)</label><input id="rho" type="number" value="1.225" step="0.001">
+<label>Velocity V (m/s)</label><input id="vel" type="number" value="50" step="1">
+<label>Wing area S (m²)</label><input id="area" type="number" value="20" step="0.1">
+<label>Lift coefficient Cₗ</label><input id="cl" type="number" value="0.8" step="0.01">
+</div>
+<div class="result"><div>CALCULATED LIFT</div><strong id="liftout">—</strong> N</div>
+</div>
+</div>
+
+<div class="pane" data-pane="stress">
+<div class="calcgrid">
+<div>
+<label>Force P (N)</label><input id="force" type="number" value="10000" step="100">
+<label>Area A (mm²)</label><input id="stressarea" type="number" value="200" step="1">
+</div>
+<div class="result"><div>NORMAL STRESS</div><strong id="stressout">—</strong> MPa</div>
+</div>
+</div>
+
+<div class="pane" data-pane="bending">
+<div class="calcgrid">
+<div>
+<label>Bending moment M (N·mm)</label><input id="moment" type="number" value="100000" step="1000">
+<label>Distance from neutral axis y (mm)</label><input id="ydist" type="number" value="20" step="1">
+<label>Second moment I (mm⁴)</label><input id="inertia" type="number" value="80000" step="1000">
+</div>
+<div class="result"><div>BENDING STRESS</div><strong id="bendout">—</strong> MPa</div>
+</div>
+</div>
+</div>
+</section>
+
+<footer>
+  <b>AERO · REF</b> — Aeronautical Engineering Technical Reference<br>
+  Built as a self-contained HTML reference site. Extend the sections, formulas, diagrams and calculators as required.
+</footer>
+</main>
+
+<script>
+const navLinks=[...document.querySelectorAll(".navlinks a")];
+const sections=navLinks.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+
+function num(id){
+  const v=parseFloat(document.getElementById(id).value);
+  return Number.isFinite(v)?v:0;
+}
+function calculate(){
+  const lift=.5*num("rho")*num("vel")**2*num("area")*num("cl");
+  document.getElementById("liftout").textContent=lift.toFixed(2);
+  const stress=num("force")/num("stressarea");
+  document.getElementById("stressout").textContent=stress.toFixed(3);
+  const bend=num("moment")*num("ydist")/num("inertia");
+  document.getElementById("bendout").textContent=bend.toFixed(3);
+}
+document.querySelectorAll("input").forEach(i=>i.addEventListener("input",calculate));
+
+const tabs=document.querySelectorAll(".tabs button");
+const panes=document.querySelectorAll(".pane");
+tabs.forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    tabs.forEach(b=>b.classList.remove("active"));
+    btn.classList.add("active");
+    panes.forEach(p=>p.classList.toggle("active",p.dataset.pane===btn.dataset.tab));
+  });
+});
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){
+      navLinks.forEach(a=>a.classList.toggle("active",a.getAttribute("href")==="#"+entry.target.id));
+    }
+  });
+},{rootMargin:"-35% 0px -55% 0px"});
+sections.forEach(s=>observer.observe(s));
+calculate();
+</script>
+</body>
+</html>
