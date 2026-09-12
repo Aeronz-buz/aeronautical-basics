@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mechanics of Materials — A Structural Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#14161a;
+    --panel:#1b1e23;
+    --panel-2:#20242a;
+    --paper:#f1eee3;
+    --paper-2:#e8e3d3;
+    --ink:#191a17;
+    --text:#e7e4da;
+    --muted:#8b909a;
+    --muted-2:#5b6169;
+    --orange:#e85d2c;
+    --orange-dim:#a8461f;
+    --teal:#3fa9a4;
+    --teal-dim:#2c7975;
+    --grid:rgba(231,228,218,0.07);
+    --grid-strong:rgba(231,228,218,0.14);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:
+      linear-gradient(var(--grid) 1px, transparent 1px) 0 0/48px 48px,
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px) 0 0/48px 48px,
+      var(--bg);
+    color:var(--text);
+    font-family:'Inter', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk', sans-serif;
+    letter-spacing:-0.01em;
+  }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  a{ color:inherit; }
+
+  /* ---------- top ruler nav ---------- */
+  .ruler{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; gap:0;
+    background:rgba(20,22,26,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--grid-strong);
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .ruler::-webkit-scrollbar{display:none;}
+  .ruler-brand{
+    flex:none;
+    display:flex; align-items:center; gap:8px;
+    padding:0 18px; height:48px;
+    border-right:1px solid var(--grid-strong);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--orange);
+    white-space:nowrap;
+  }
+  .ruler-brand svg{width:16px;height:16px;}
+  .ruler-links{ display:flex; }
+  .ruler-links a{
+    flex:none;
+    padding:0 16px; height:48px;
+    display:flex; align-items:center;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px; letter-spacing:0.02em;
+    color:var(--muted);
+    text-decoration:none;
+    border-right:1px solid var(--grid);
+    white-space:nowrap;
+    position:relative;
+    transition:color .15s ease;
+  }
+  .ruler-links a:hover{ color:var(--text); }
+  .ruler-links a::before{
+    content:attr(data-n);
+    color:var(--orange-dim);
+    margin-right:7px;
+  }
+  .ruler-links a:hover::before{ color:var(--orange); }
+
+  /* ---------- hero ---------- */
+  .hero{
+    max-width:1180px; margin:0 auto;
+    padding:76px 32px 40px;
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px; color:var(--teal);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px; text-transform:uppercase; letter-spacing:0.08em;
+  }
+  .eyebrow .tick{ width:26px; height:1px; background:var(--teal); }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 56px);
+    line-height:1.04; font-weight:600;
+    margin:0 0 22px;
+    color:var(--text);
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--orange);
+  }
+  .hero p.lede{
+    font-size:16.5px; line-height:1.65; color:var(--muted);
+    max-width:46ch; margin:0 0 28px;
+  }
+  .hero-stats{
+    display:flex; gap:0; border-top:1px solid var(--grid-strong);
+  }
+  .hero-stats div{
+    padding:14px 22px 0 0; margin-right:22px;
+    border-right:1px solid var(--grid-strong);
+  }
+  .hero-stats div:last-child{ border-right:none; }
+  .hero-stats .num{ font-family:'IBM Plex Mono',monospace; font-size:20px; color:var(--orange); }
+  .hero-stats .lbl{ font-size:11px; color:var(--muted-2); text-transform:uppercase; letter-spacing:.06em; margin-top:2px; }
+
+  .curve-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    padding:22px 22px 16px;
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.6);
+    position:relative;
+  }
+  .curve-card .tag{
+    position:absolute; top:14px; right:16px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    color:var(--muted-2); letter-spacing:.05em;
+  }
+  .curve-card h3{
+    color:var(--ink); font-size:13px; margin:0 0 4px;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; letter-spacing:.02em;
+  }
+  .curve-card .sub{ color:#6b6a5f; font-size:11px; margin-bottom:10px; font-family:'IBM Plex Mono',monospace;}
+  .curve-path{
+    stroke:var(--orange);
+    stroke-width:2.5;
+    fill:none;
+    stroke-dasharray:520;
+    stroke-dashoffset:520;
+    animation:draw 2.2s ease-out .3s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  .curve-elastic{ stroke:var(--teal-dim); stroke-width:2; fill:none; stroke-dasharray:4 4;}
+
+  /* ---------- sections ---------- */
+  .section{
+    max-width:1180px; margin:0 auto;
+    padding:64px 32px;
+    border-top:1px solid var(--grid-strong);
+  }
+  .section-head{
+    display:flex; align-items:baseline; gap:16px; margin-bottom:36px;
+  }
+  .section-head .index{
+    font-family:'IBM Plex Mono',monospace; color:var(--orange-dim); font-size:14px;
+  }
+  .section-head h2{
+    font-size:clamp(22px,2.6vw,30px); font-weight:600; margin:0;
+  }
+  .section-head .rule{ flex:1; height:1px; background:var(--grid-strong); }
+
+  .grid-2{
+    display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center;
+  }
+  .grid-2.rev .diagram{ order:2; }
+  .diagram{
+    background:var(--panel);
+    border:1px solid var(--grid-strong);
+    border-radius:var(--radius);
+    padding:20px;
+    position:relative;
+  }
+  .diagram svg{ width:100%; height:auto; display:block; }
+  .diagram .cap{
+    margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2);
+    display:flex; justify-content:space-between;
+  }
+  .copy p{ line-height:1.7; color:#c8c5ba; font-size:15px; }
+  .copy p.small{ color:var(--muted); font-size:13.5px; }
+
+  .formula-card{
+    background:var(--paper);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin:18px 0;
+  }
+  .formula-card .name{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#7a7869;
+    text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;
+  }
+  .formula-card .eq{
+    font-family:'IBM Plex Mono',monospace; font-size:20px; color:var(--ink); font-weight:600;
+  }
+  .formula-card .terms{
+    margin-top:10px; font-size:12px; color:#5f5d52; line-height:1.9;
+    font-family:'IBM Plex Mono',monospace;
+  }
+  .formula-card .terms b{ color:var(--ink); }
+
+  .pill-row{ display:flex; gap:8px; flex-wrap:wrap; margin-top:16px; }
+  .pill{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--teal);
+    border:1px solid var(--teal-dim); padding:5px 10px; border-radius:20px;
+  }
+
+  /* ---------- process steps ---------- */
+  .steps{ position:relative; max-width:900px; }
+  .steps::before{
+    content:''; position:absolute; left:27px; top:10px; bottom:10px; width:1px;
+    background:var(--grid-strong);
+  }
+  .step{
+    position:relative; display:grid; grid-template-columns:56px 1fr; gap:20px;
+    padding:22px 0; border-bottom:1px solid var(--grid);
+  }
+  .step:last-child{ border-bottom:none; }
+  .step-num{
+    position:relative; z-index:1;
+    width:56px; height:56px; border-radius:50%;
+    background:var(--panel-2); border:1px solid var(--grid-strong);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:18px; color:var(--orange);
+    flex:none;
+  }
+  .step.check .step-num{ border-color:var(--teal-dim); color:var(--teal); }
+  .step-body h3{
+    margin:6px 0 8px; font-size:17px; font-weight:600; color:var(--text);
+    display:flex; align-items:center; gap:10px;
+  }
+  .step-body .step-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted-2);
+    border:1px solid var(--grid-strong); padding:2px 8px; border-radius:20px; text-transform:uppercase;
+  }
+  .step-body p{ margin:0; line-height:1.65; color:#c8c5ba; font-size:14.5px; max-width:68ch; }
+  .step-body .step-formula{
+    margin-top:10px; display:inline-block;
+    font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--orange-dim);
+    background:var(--paper); padding:5px 10px; border-radius:var(--radius);
+  }
+
+  /* ---------- calculator ---------- */
+  .calc-tabs{ display:flex; gap:0; margin-bottom:0; border:1px solid var(--grid-strong); border-bottom:none; border-radius:var(--radius) var(--radius) 0 0; overflow:hidden;}
+  .calc-tabs button{
+    flex:1; padding:13px 10px; background:var(--panel);
+    border:none; border-right:1px solid var(--grid-strong);
+    color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:12px;
+    cursor:pointer; transition:all .15s ease;
+  }
+  .calc-tabs button:last-child{ border-right:none; }
+  .calc-tabs button.active{ background:var(--orange); color:#1a0d05; font-weight:600; }
+  .calc-body{
+    border:1px solid var(--grid-strong);
+    background:var(--panel-2);
+    padding:28px;
+    border-radius:0 0 var(--radius) var(--radius);
+    display:grid; grid-template-columns:1fr 1fr; gap:32px;
+  }
+  .calc-pane{ display:none; }
+  .calc-pane.active{ display:contents; }
+  .calc-inputs label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted);
+    margin:14px 0 6px; text-transform:uppercase; letter-spacing:.04em;
+  }
+  .calc-inputs label:first-child{ margin-top:0; }
+  .calc-inputs input, .calc-inputs select{
+    width:100%; padding:10px 12px; background:var(--bg);
+    border:1px solid var(--grid-strong); color:var(--text);
+    font-family:'IBM Plex Mono',monospace; font-size:14px; border-radius:var(--radius);
+  }
+  .calc-inputs input:focus, .calc-inputs select:focus{ outline:2px solid var(--orange); outline-offset:1px; border-color:var(--orange); }
+  .calc-formula-note{ font-size:11px; color:var(--muted-2); margin-top:16px; font-family:'IBM Plex Mono',monospace; line-height:1.6; }
+  .calc-result{
+    background:var(--paper); border-radius:var(--radius); padding:22px;
+    display:flex; flex-direction:column; justify-content:center;
+  }
+  .calc-result .r-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#7a7869; text-transform:uppercase; letter-spacing:.06em; }
+  .calc-result .r-value{ font-family:'IBM Plex Mono',monospace; font-size:32px; color:var(--orange-dim); font-weight:700; margin:6px 0 2px; word-break:break-word; }
+  .calc-result .r-sub{ font-size:11.5px; color:#6b6a5f; font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- table ---------- */
+  .theory-table{ width:100%; border-collapse:collapse; margin-top:8px; }
+  .theory-table th, .theory-table td{
+    text-align:left; padding:12px 14px; border-bottom:1px solid var(--grid-strong);
+    font-size:13px; color:#c8c5ba;
+  }
+  .theory-table th{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em;
+  }
+  .theory-table td.mono{ color:var(--orange-dim); }
+
+  footer{
+    max-width:1180px; margin:0 auto; padding:40px 32px 64px;
+    display:flex; justify-content:space-between; align-items:center;
+    border-top:1px solid var(--grid-strong);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--muted-2);
+    flex-wrap:wrap; gap:12px;
+  }
+
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; padding-top:100px;}
+    .grid-2, .grid-2.rev{ grid-template-columns:1fr; }
+    .grid-2.rev .diagram{ order:0; }
+    .calc-body{ grid-template-columns:1fr; }
+    .ruler-brand{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="ruler" aria-label="Section navigation">
+  <div class="ruler-brand">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20 L20 4 M4 4h16v16"/></svg>
+    MOM · REF
+  </div>
+  <div class="ruler-links">
+    <a href="#intro" data-n="00">Introduction</a>
+    <a href="#stress-strain" data-n="01">Stress &amp; Strain</a>
+    <a href="#axial" data-n="02">Axial Loading</a>
+    <a href="#torsion" data-n="03">Torsion</a>
+    <a href="#shear-bending" data-n="04">Shear &amp; Bending</a>
+    <a href="#bending-stress" data-n="05">Bending Stress</a>
+    <a href="#deflection" data-n="06">Deflection</a>
+    <a href="#combined" data-n="07">Combined Loading</a>
+    <a href="#failure" data-n="08">Failure Theories</a>
+    <a href="#process" data-n="09">Solving Process</a>
+    <a href="#calculator" data-n="10">Calculator</a>
+  </div>
+</nav>
+
+<header class="hero" id="intro">
+  <div>
+    <div class="eyebrow"><span class="tick"></span>Solid Mechanics · Reference</div>
+    <h1>How materials carry load, and where they <em>give way.</em></h1>
+    <p class="lede">Mechanics of materials connects the forces applied to a structural member with the internal stresses, strains, and deformations that result — and predicts the point at which it fails. This is the field that sizes the beam, the shaft, and the bolt.</p>
+    <div class="hero-stats">
+      <div><div class="num">σ = P/A</div><div class="lbl">Normal Stress</div></div>
+      <div><div class="num">τ = Tr/J</div><div class="lbl">Torsional Shear</div></div>
+      <div><div class="num">σ = My/I</div><div class="lbl">Bending Stress</div></div>
+    </div>
+  </div>
+
+  <div class="curve-card">
+    <span class="tag">FIG. 0 — MILD STEEL</span>
+    <h3>Stress–Strain Diagram</h3>
+    <div class="sub">engineering stress vs. engineering strain</div>
+    <svg viewBox="0 0 380 240" aria-label="Stress strain curve for mild steel showing elastic region, yield plateau, strain hardening, and fracture">
+      <line x1="40" y1="200" x2="360" y2="200" stroke="#c9c6b8" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="200" stroke="#c9c6b8" stroke-width="1"/>
+      <text x="200" y="228" font-family="IBM Plex Mono" font-size="10" fill="#7a7869" text-anchor="middle">STRAIN (ε)</text>
+      <text x="18" y="110" font-family="IBM Plex Mono" font-size="10" fill="#7a7869" transform="rotate(-90 18 110)" text-anchor="middle">STRESS (σ)</text>
+      <path class="curve-elastic" d="M40,200 L95,90"/>
+      <path class="curve-path" d="M40,200 L95,90 L150,86 L230,60 L290,40 L320,70 L335,120"/>
+      <circle cx="95" cy="90" r="3" fill="#e85d2c"/>
+      <text x="100" y="85" font-family="IBM Plex Mono" font-size="9" fill="#19180f">yield</text>
+      <circle cx="290" cy="40" r="3" fill="#e85d2c"/>
+      <text x="255" y="32" font-family="IBM Plex Mono" font-size="9" fill="#19180f">ultimate</text>
+      <circle cx="335" cy="120" r="3" fill="#e85d2c"/>
+      <text x="300" y="135" font-family="IBM Plex Mono" font-size="9" fill="#19180f">fracture</text>
+    </svg>
+    <div class="cap"><span>ELASTIC → PLASTIC → NECKING</span><span>E = slope</span></div>
+  </div>
+</header>
+
+<!-- 01 STRESS AND STRAIN -->
+<section class="section" id="stress-strain">
+  <div class="section-head"><span class="index">01</span><h2>Stress &amp; Strain</h2><span class="rule"></span></div>
+  <div class="grid-2">
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" aria-label="Bar in tension with internal cross section showing distributed normal stress">
+        <line x1="30" y1="100" x2="130" y2="100" stroke="#8b909a" stroke-width="6"/>
+        <rect x="130" y="70" width="120" height="60" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <line x1="250" y1="100" x2="350" y2="100" stroke="#8b909a" stroke-width="6"/>
+        <line x1="190" y1="70" x2="190" y2="130" stroke="#3fa9a4" stroke-width="1.5" stroke-dasharray="3 3"/>
+        <g stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow)">
+          <line x1="185" y1="75" x2="205" y2="75"/>
+          <line x1="185" y1="85" x2="205" y2="85"/>
+          <line x1="185" y1="95" x2="205" y2="95"/>
+          <line x1="185" y1="105" x2="205" y2="105"/>
+          <line x1="185" y1="115" x2="205" y2="115"/>
+          <line x1="185" y1="125" x2="205" y2="125"/>
+        </g>
+        <defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#e85d2c"/></marker></defs>
+        <line x1="15" y1="150" x2="20" y2="140" stroke="#e7e4da" stroke-width="1"/>
+        <text x="60" y="60" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">P →</text>
+        <text x="290" y="60" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">← P</text>
+        <text x="150" y="150" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">section cut</text>
+      </svg>
+      <div class="cap"><span>UNIFORM AXIAL STRESS</span><span>σ ACROSS AREA A</span></div>
+    </div>
+    <div class="copy">
+      <p>When a load is applied to a member, it doesn't just move or hold still — internal forces develop throughout its cross-section to resist it. <b style="color:var(--text)">Stress</b> is that internal force divided by the area it acts on. <b style="color:var(--text)">Strain</b> is the resulting deformation, expressed as a fraction of the original length.</p>
+      <p class="small">For a slender bar loaded straight along its axis, the stress is assumed to spread evenly across the cross-section — this is the simplest case in the subject, and the one everything else builds on.</p>
+      <div class="formula-card">
+        <div class="name">Normal Stress</div>
+        <div class="eq">σ = P / A</div>
+        <div class="terms"><b>σ</b> stress (Pa) &nbsp; <b>P</b> axial force (N) &nbsp; <b>A</b> cross-section area (m²)</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Hooke's Law (linear-elastic region)</div>
+        <div class="eq">σ = E · ε</div>
+        <div class="terms"><b>E</b> modulus of elasticity (Pa) &nbsp; <b>ε</b> strain, δ/L (dimensionless)</div>
+      </div>
+      <div class="pill-row"><span class="pill">Ductile</span><span class="pill">Brittle</span><span class="pill">Poisson's ratio ν</span><span class="pill">Elastic modulus E</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 AXIAL LOADING -->
+<section class="section" id="axial">
+  <div class="section-head"><span class="index">02</span><h2>Axial Loading &amp; Deformation</h2><span class="rule"></span></div>
+  <div class="grid-2 rev">
+    <div class="copy">
+      <p>A rod under axial load doesn't only stress — it stretches or shortens. That change in length, <span class="mono" style="color:var(--teal)">δ</span>, is what a designer actually needs when parts must fit, or when thermal or mounting tolerances matter.</p>
+      <p class="small">For members with stepped cross-sections or several materials in series, total deformation is just the sum of the deformation in each segment.</p>
+      <div class="formula-card">
+        <div class="name">Axial Deformation</div>
+        <div class="eq">δ = PL / (AE)</div>
+        <div class="terms"><b>δ</b> elongation (m) &nbsp; <b>L</b> original length (m) &nbsp; <b>AE</b> axial stiffness</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Statically Indeterminate Members</div>
+        <div class="eq">ΣF = 0, δ<sub>compatibility</sub></div>
+        <div class="terms">solved by combining equilibrium with a geometric compatibility equation when reactions outnumber equilibrium equations</div>
+      </div>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" aria-label="Rod before and after axial elongation under load P">
+        <text x="20" y="30" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">UNLOADED</text>
+        <rect x="20" y="40" width="200" height="18" fill="none" stroke="#5b6169" stroke-width="1.5"/>
+        <text x="20" y="100" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">LOADED (+δ)</text>
+        <rect x="20" y="110" width="260" height="18" fill="none" stroke="#e85d2c" stroke-width="1.5"/>
+        <line x1="280" y1="100" x2="330" y2="100" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow2)"/>
+        <defs><marker id="arrow2" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#e85d2c"/></marker></defs>
+        <text x="290" y="95" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
+        <line x1="20" y1="150" x2="220" y2="150" stroke="#3fa9a4" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="90" y="145" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">L</text>
+        <line x1="220" y1="165" x2="280" y2="165" stroke="#e85d2c" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="235" y="180" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">δ</text>
+      </svg>
+      <div class="cap"><span>ELONGATION UNDER TENSION</span><span>δ = PL/AE</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 TORSION -->
+<section class="section" id="torsion">
+  <div class="section-head"><span class="index">03</span><h2>Torsion</h2><span class="rule"></span></div>
+  <div class="grid-2">
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" aria-label="Circular shaft under torque showing shear stress distribution and angle of twist">
+        <ellipse cx="90" cy="100" rx="20" ry="45" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <rect x="90" y="55" width="200" height="90" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <ellipse cx="290" cy="100" rx="20" ry="45" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <path d="M70,70 A25,25 0 0,1 70,130" fill="none" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow3)"/>
+        <defs><marker id="arrow3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#e85d2c"/></marker></defs>
+        <path d="M310,130 A25,25 0 0,1 310,70" fill="none" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow3)"/>
+        <text x="40" y="70" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">T</text>
+        <text x="335" y="130" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">T</text>
+        <line x1="290" y1="100" x2="290" y2="55" stroke="#3fa9a4" stroke-width="1.5"/>
+        <line x1="290" y1="100" x2="285" y2="58" stroke="#8b909a" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <path d="M290,80 A20,20 0 0,0 285,58" fill="none" stroke="#3fa9a4" stroke-width="1"/>
+        <text x="298" y="72" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">φ</text>
+        <text x="150" y="35" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">shear stress τ ∝ r (max at surface)</text>
+      </svg>
+      <div class="cap"><span>CIRCULAR SHAFT IN TORSION</span><span>τ = Tr/J</span></div>
+    </div>
+    <div class="copy">
+      <p>Twisting a shaft sets up shear stress that's zero at the centerline and maximum at the outer surface — the opposite intuition from axial loading, where stress is uniform. This is why hollow shafts are so efficient: material near the center barely contributes to torsional strength anyway.</p>
+      <div class="formula-card">
+        <div class="name">Torsional Shear Stress</div>
+        <div class="eq">τ = T·r / J</div>
+        <div class="terms"><b>T</b> torque (N·m) &nbsp; <b>r</b> radial distance &nbsp; <b>J</b> polar moment of inertia</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Angle of Twist</div>
+        <div class="eq">φ = TL / (JG)</div>
+        <div class="terms"><b>G</b> shear modulus (Pa) &nbsp; <b>φ</b> twist angle (rad)</div>
+      </div>
+      <p class="small">For a solid circular section, J = πr⁴/2. For a hollow tube, J = π(r<sub>o</sub>⁴ − r<sub>i</sub>⁴)/2.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 04 SHEAR AND BENDING -->
+<section class="section" id="shear-bending">
+  <div class="section-head"><span class="index">04</span><h2>Shear Force &amp; Bending Moment</h2><span class="rule"></span></div>
+  <div class="grid-2 rev">
+    <div class="copy">
+      <p>Before you can size a beam, you need to know how internal shear force and bending moment vary along its length. Shear and moment diagrams plot exactly that — and they're built from a simple relationship: the slope of the moment diagram equals the shear, and the slope of the shear diagram equals the negative of the distributed load.</p>
+      <div class="formula-card">
+        <div class="name">Load–Shear–Moment Relations</div>
+        <div class="eq">dV/dx = −w(x) &nbsp;&nbsp; dM/dx = V(x)</div>
+        <div class="terms"><b>V</b> internal shear force &nbsp; <b>M</b> internal bending moment &nbsp; <b>w</b> distributed load</div>
+      </div>
+      <p class="small">Peaks in the moment diagram occur where shear crosses zero — that's where a beam is checked first for bending stress.</p>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 380 220" aria-label="Simply supported beam with a center point load, plus its shear force and bending moment diagrams">
+        <line x1="30" y1="60" x2="350" y2="60" stroke="#e7e4da" stroke-width="3"/>
+        <polygon points="30,60 20,78 40,78" fill="none" stroke="#8b909a" stroke-width="1.5"/>
+        <polygon points="350,60 340,78 360,78" fill="none" stroke="#8b909a" stroke-width="1.5"/>
+        <line x1="190" y1="20" x2="190" y2="55" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow4)"/>
+        <defs><marker id="arrow4" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
+        <text x="196" y="30" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
+
+        <text x="30" y="98" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">V(x)</text>
+        <line x1="30" y1="110" x2="350" y2="110" stroke="#5b6169" stroke-width="1"/>
+        <line x1="30" y1="95" x2="190" y2="95" stroke="#3fa9a4" stroke-width="2"/>
+        <line x1="190" y1="95" x2="190" y2="125" stroke="#3fa9a4" stroke-width="2"/>
+        <line x1="190" y1="125" x2="350" y2="125" stroke="#3fa9a4" stroke-width="2"/>
+
+        <text x="30" y="150" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">M(x)</text>
+        <line x1="30" y1="200" x2="350" y2="200" stroke="#5b6169" stroke-width="1"/>
+        <path d="M30,200 L190,160 L350,200" fill="none" stroke="#e85d2c" stroke-width="2"/>
+      </svg>
+      <div class="cap"><span>SIMPLE BEAM, CENTER LOAD</span><span>V &amp; M DIAGRAMS</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 BENDING STRESS -->
+<section class="section" id="bending-stress">
+  <div class="section-head"><span class="index">05</span><h2>Bending Stress</h2><span class="rule"></span></div>
+  <div class="grid-2">
+    <div class="diagram">
+      <svg viewBox="0 0 380 210" aria-label="Beam cross section showing linear bending stress distribution, tension below neutral axis and compression above">
+        <rect x="60" y="30" width="70" height="140" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <line x1="60" y1="100" x2="130" y2="100" stroke="#8b909a" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="132" y="104" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">N.A.</text>
+        <line x1="180" y1="30" x2="280" y2="30" stroke="#3fa9a4" stroke-width="1"/>
+        <line x1="180" y1="100" x2="180" y2="100" stroke="#3fa9a4" stroke-width="1"/>
+        <line x1="180" y1="170" x2="280" y2="170" stroke="#e85d2c" stroke-width="1"/>
+        <path d="M180,100 L260,35" stroke="#3fa9a4" stroke-width="2" fill="none"/>
+        <path d="M180,100 L260,165" stroke="#e85d2c" stroke-width="2" fill="none"/>
+        <line x1="180" y1="30" x2="180" y2="170" stroke="#5b6169" stroke-width="1"/>
+        <text x="245" y="45" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">compression</text>
+        <text x="255" y="185" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">tension</text>
+      </svg>
+      <div class="cap"><span>LINEAR STRESS DISTRIBUTION</span><span>σ = My/I</span></div>
+    </div>
+    <div class="copy">
+      <p>A beam in pure bending develops compressive stress on one side of the cross-section and tensile stress on the other, with a linear transition through an unstressed <b style="color:var(--text)">neutral axis</b>. Stress is highest at the outer fibers — which is why I-beams put most of their material as far from the neutral axis as possible.</p>
+      <div class="formula-card">
+        <div class="name">Flexure Formula</div>
+        <div class="eq">σ = M·y / I</div>
+        <div class="terms"><b>M</b> bending moment &nbsp; <b>y</b> distance from neutral axis &nbsp; <b>I</b> moment of inertia</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Horizontal Shear Stress in Beams</div>
+        <div class="eq">τ = V·Q / (I·b)</div>
+        <div class="terms"><b>Q</b> first moment of area above the cut &nbsp; <b>b</b> width at the cut</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 DEFLECTION -->
+<section class="section" id="deflection">
+  <div class="section-head"><span class="index">06</span><h2>Deflection</h2><span class="rule"></span></div>
+  <div class="grid-2 rev">
+    <div class="copy">
+      <p>Stress tells you whether a member breaks. Deflection tells you whether it's still usable — a floor beam can be well within its stress limit and still feel unacceptably springy. Deflection is governed by the curvature of the beam, which is proportional to the bending moment.</p>
+      <div class="formula-card">
+        <div class="name">Beam Curvature</div>
+        <div class="eq">EI · d²v/dx² = M(x)</div>
+        <div class="terms">integrated twice, with boundary conditions, to get slope and deflection</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Cantilever, End Point Load</div>
+        <div class="eq">δ<sub>max</sub> = PL³ / (3EI)</div>
+        <div class="terms">at the free end &nbsp; — one of the standard tabulated cases</div>
+      </div>
+      <p class="small">Common methods: double integration, superposition of tabulated cases, moment-area, and Castigliano's theorem.</p>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" aria-label="Cantilever beam fixed at one end deflecting downward under an end point load">
+        <rect x="20" y="40" width="20" height="120" fill="#5b6169"/>
+        <line x1="40" y1="90" x2="330" y2="90" stroke="#5b6169" stroke-width="2" stroke-dasharray="4 4"/>
+        <path d="M40,90 C 150,92 250,100 330,155" fill="none" stroke="#e85d2c" stroke-width="2.5"/>
+        <line x1="330" y1="155" x2="330" y2="120" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow5)"/>
+        <defs><marker id="arrow5" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
+        <text x="336" y="115" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
+        <line x1="330" y1="90" x2="330" y2="155" stroke="#3fa9a4" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="335" y="180" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">δmax</text>
+      </svg>
+      <div class="cap"><span>CANTILEVER DEFLECTION</span><span>δ = PL³/3EI</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 COMBINED LOADING -->
+<section class="section" id="combined">
+  <div class="section-head"><span class="index">07</span><h2>Combined Loading &amp; Mohr's Circle</h2><span class="rule"></span></div>
+  <div class="grid-2">
+    <div class="diagram">
+      <svg viewBox="0 0 380 220" aria-label="Mohr's circle diagram plotting normal stress against shear stress with principal stress points marked">
+        <line x1="40" y1="110" x2="350" y2="110" stroke="#c9c6b8" stroke-width="1"/>
+        <line x1="195" y1="20" x2="195" y2="200" stroke="#c9c6b8" stroke-width="1"/>
+        <circle cx="220" cy="110" r="75" fill="none" stroke="#e85d2c" stroke-width="2"/>
+        <circle cx="145" cy="110" r="3" fill="#3fa9a4"/>
+        <circle cx="295" cy="110" r="3" fill="#3fa9a4"/>
+        <text x="120" y="130" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">σ_min</text>
+        <text x="285" y="130" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">σ_max</text>
+        <line x1="220" y1="110" x2="270" y2="70" stroke="#8b909a" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <circle cx="270" cy="70" r="3" fill="#e85d2c"/>
+        <text x="270" y="60" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">τ_max</text>
+        <text x="355" y="114" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">σ</text>
+        <text x="200" y="16" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">τ</text>
+      </svg>
+      <div class="cap"><span>PRINCIPAL STRESSES</span><span>GRAPHICAL TRANSFORMATION</span></div>
+    </div>
+    <div class="copy">
+      <p>Real members rarely see just one type of load — a shaft can bend and twist at once, a pressure vessel wall carries stress in two directions simultaneously. Stress transformation equations, or their graphical twin, <b style="color:var(--text)">Mohr's circle</b>, find the maximum normal and shear stress at any orientation — the values that actually govern failure.</p>
+      <div class="formula-card">
+        <div class="name">Principal Stresses</div>
+        <div class="eq">σ<sub>1,2</sub> = σ<sub>avg</sub> ± R</div>
+        <div class="terms">R = √[((σx−σy)/2)² + τxy²] — the radius of Mohr's circle</div>
+      </div>
+      <p class="small">The center of the circle sits at the average normal stress; every point on the circle represents the stress state on some plane through the material.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 08 FAILURE THEORIES -->
+<section class="section" id="failure">
+  <div class="section-head"><span class="index">08</span><h2>Failure Theories</h2><span class="rule"></span></div>
+  <div class="copy" style="max-width:70ch; margin-bottom:20px;">
+    <p>Under combined loading, "when does it fail" stops having a single stress value as the answer. Failure theories translate a multi-axial stress state into an equivalent stress that can be compared against a material's known uniaxial strength.</p>
+  </div>
+  <table class="theory-table">
+    <thead>
+      <tr><th>Theory</th><th>Best suited to</th><th>Criterion</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Maximum Shear Stress (Tresca)</td><td>Ductile materials</td><td class="mono">τ_max = σ_y / 2</td></tr>
+      <tr><td>Distortion Energy (von Mises)</td><td>Ductile materials, more accurate</td><td class="mono">σ' = √(σ1² − σ1σ2 + σ2²)</td></tr>
+      <tr><td>Maximum Normal Stress</td><td>Brittle materials</td><td class="mono">σ_max = σ_ult</td></tr>
+      <tr><td>Mohr's Failure Criterion</td><td>Brittle materials, unequal T/C strength</td><td class="mono">envelope from tension &amp; compression tests</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PROBLEM-SOLVING PROCESS -->
+<section class="section" id="process">
+  <div class="section-head"><span class="index">09</span><h2>How to Solve a Mechanics of Materials Problem</h2><span class="rule"></span></div>
+  <div class="copy" style="max-width:70ch; margin-bottom:36px;">
+    <p>Every problem in this subject, no matter how it's dressed up, follows the same sequence: idealize the structure, find what's holding it up, find what's happening inside it, then check that against what the material can take. Work the steps in order — skipping ahead is where most errors come from.</p>
+  </div>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Idealize the structure <span class="step-tag">set up</span></h3>
+        <p>Sketch the member on its own, clean of everything but what affects it mechanically: supports, applied loads, dimensions, and material. Replace real supports with their idealized symbols — pin, roller, fixed — and note what each one restrains.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Find the support reactions <span class="step-tag">statics</span></h3>
+        <p>Draw the free-body diagram of the whole member and apply the equations of equilibrium. If there are more unknown reactions than equilibrium equations, flag the problem as statically indeterminate — you'll need a compatibility equation later, not just statics.</p>
+        <span class="step-formula">ΣFx = 0 &nbsp; ΣFy = 0 &nbsp; ΣM = 0</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Cut a section and find internal loadings <span class="step-tag">internal forces</span></h3>
+        <p>Section the member at the point — or points — you care about. Draw the free-body diagram of one side of the cut and solve for whatever internal loads act there: axial force N, shear V, bending moment M, torque T. For a full picture, build the shear and moment diagrams along the whole length.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Identify the critical section <span class="step-tag">where it matters</span></h3>
+        <p>Internal loadings usually aren't constant along the member. Locate the section where the combination of N, V, M, and T is most severe — often, but not always, where the bending moment is largest.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h3>Get the section properties <span class="step-tag">geometry</span></h3>
+        <p>Compute whatever the stress formulas will need for that cross-section: area A, moment of inertia I, polar moment J, distance to the outer fiber c, and first moment of area Q if you'll need shear stress.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body">
+        <h3>Calculate the stresses <span class="step-tag">apply the formulas</span></h3>
+        <p>Plug the internal loadings and section properties into the matching stress formula. A member under combined loading needs more than one of these, evaluated at the same point.</p>
+        <span class="step-formula">σ = P/A &nbsp; σ = My/I &nbsp; τ = Tr/J &nbsp; τ = VQ/Ib</span>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">7</div>
+      <div class="step-body">
+        <h3>Combine stresses at the point <span class="step-tag">superposition</span></h3>
+        <p>If more than one stress acts at the same point, superpose them algebraically, then use stress transformation or Mohr's circle to find the principal stresses and maximum shear stress — the values a failure theory actually needs.</p>
+      </div>
+    </div>
+
+    <div class="step check">
+      <div class="step-num">8</div>
+      <div class="step-body">
+        <h3>Check against strength <span class="step-tag">failure criterion</span></h3>
+        <p>Compare the governing stress to the material's strength using the failure theory appropriate to the material — Tresca or von Mises for ductile, maximum normal stress for brittle — and apply the required factor of safety.</p>
+        <span class="step-formula">FS = σ_failure / σ_allowable</span>
+      </div>
+    </div>
+
+    <div class="step check">
+      <div class="step-num">9</div>
+      <div class="step-body">
+        <h3>Check serviceability <span class="step-tag">deflection</span></h3>
+        <p>Strength isn't the only requirement. If the member also has a stiffness or deflection limit, integrate the curvature equation or use a tabulated case to confirm deflection stays within what's allowed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATOR -->
+<section class="section" id="calculator">
+  <div class="section-head"><span class="index">10</span><h2>Quick Calculations</h2><span class="rule"></span></div>
+  <div class="calc-tabs" role="tablist">
+    <button class="active" data-tab="axial">Axial Stress</button>
+    <button data-tab="torsion">Torsion</button>
+    <button data-tab="bending">Bending Stress</button>
+    <button data-tab="deflect">Cantilever Deflection</button>
+  </div>
+  <div class="calc-body">
+
+    <div class="calc-pane active" data-pane="axial">
+      <div class="calc-inputs">
+        <label>Axial Force P (N)</label>
+        <input type="number" id="ax-P" value="10000">
+        <label>Cross-Section Area A (mm²)</label>
+        <input type="number" id="ax-A" value="200">
+        <div class="calc-formula-note">σ = P / A &nbsp;·&nbsp; result converted to MPa (A entered in mm²)</div>
+      </div>
+      <div class="calc-result">
+        <div class="r-label">Normal Stress σ</div>
+        <div class="r-value" id="ax-out">—</div>
+        <div class="r-sub">megapascals (MPa = N/mm²)</div>
+      </div>
+    </div>
+
+    <div class="calc-pane" data-pane="torsion" style="display:none;">
+      <div class="calc-inputs">
+        <label>Torque T (N·m)</label>
+        <input type="number" id="tor-T" value="500">
+        <label>Shaft Outer Radius r (mm)</label>
+        <input type="number" id="tor-r" value="25">
+        <div class="calc-formula-note">τ = T·r / J &nbsp;·&nbsp; solid circular shaft, J = πr⁴/2</div>
+      </div>
+      <div class="calc-result">
+        <div class="r-label">Max Shear Stress τ</div>
+        <div class="r-value" id="tor-out">—</div>
+        <div class="r-sub">megapascals (MPa)</div>
+      </div>
+    </div>
+
+    <div class="calc-pane" data-pane="bending" style="display:none;">
+      <div class="calc-inputs">
+        <label>Bending Moment M (N·m)</label>
+        <input type="number" id="bend-M" value="2000">
+        <label>Distance from Neutral Axis y (mm)</label>
+        <input type="number" id="bend-y" value="75">
+        <label>Moment of Inertia I (mm⁴, ×10⁶)</label>
+        <input type="number" id="bend-I" value="8">
+        <div class="calc-formula-note">σ = M·y / I</div>
+      </div>
+      <div class="calc-result">
+        <div class="r-label">Bending Stress σ</div>
+        <div class="r-value" id="bend-out">—</div>
+        <div class="r-sub">megapascals (MPa)</div>
+      </div>
+    </div>
+
+    <div class="calc-pane" data-pane="deflect" style="display:none;">
+      <div class="calc-inputs">
+        <label>End Load P (N)</label>
+        <input type="number" id="def-P" value="500">
+        <label>Length L (m)</label>
+        <input type="number" id="def-L" value="2">
+        <label>Modulus E (GPa)</label>
+        <input type="number" id="def-E" value="200">
+        <label>Moment of Inertia I (mm⁴, ×10⁶)</label>
+        <input type="number" id="def-I" value="8">
+        <div class="calc-formula-note">δ = PL³ / (3EI) — cantilever, point load at free end</div>
+      </div>
+      <div class="calc-result">
+        <div class="r-label">Max Deflection δ</div>
+        <div class="r-value" id="def-out">—</div>
+        <div class="r-sub">millimeters (mm)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <span>MECHANICS OF MATERIALS — STRUCTURAL REFERENCE</span>
+  <span>FOR EDUCATIONAL USE · VERIFY AGAINST YOUR COURSE STANDARD &amp; CODE</span>
+</footer>
+
+<script>
+  // tab switching
+  const tabs = document.querySelectorAll('.calc-tabs button');
+  const panes = document.querySelectorAll('.calc-pane');
+  tabs.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      panes.forEach(p=>{
+        p.style.display = (p.dataset.pane === btn.dataset.tab) ? 'contents' : 'none';
+      });
+    });
+  });
+
+  function num(id){ const v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+  function fmt(v){ return (Math.abs(v) >= 1000 || (Math.abs(v) < 0.01 && v !== 0)) ? v.toExponential(3) : v.toFixed(3); }
+
+  function calcAll(){
+    // Axial: P(N)/A(mm2) -> MPa
+    const P1 = num('ax-P'), A1 = num('ax-A');
+    document.getElementById('ax-out').textContent = A1 !== 0 ? fmt(P1/A1) + ' MPa' : '—';
+
+    // Torsion: T(N*m), r(mm) -> convert to consistent units, J = pi r^4/2 (mm^4), T in N*mm
+    const T2 = num('tor-T') * 1000; // N*mm
+    const r2 = num('tor-r'); // mm
+    const J2 = Math.PI * Math.pow(r2,4) / 2; // mm^4
+    document.getElementById('tor-out').textContent = J2 !== 0 ? fmt(T2*r2/J2) + ' MPa' : '—';
+
+    // Bending: M(N*m) -> N*mm, y(mm), I(mm^4 *1e6)
+    const M3 = num('bend-M') * 1000; // N*mm
+    const y3 = num('bend-y'); // mm
+    const I3 = num('bend-I') * 1e6; // mm^4
+    document.getElementById('bend-out').textContent = I3 !== 0 ? fmt(M3*y3/I3) + ' MPa' : '—';
+
+    // Deflection: P(N), L(m)->mm, E(GPa)->MPa, I(mm^4*1e6)
+    const P4 = num('def-P');
+    const L4 = num('def-L') * 1000; // mm
+    const E4 = num('def-E') * 1000; // MPa (GPa*1000)
+    const I4 = num('def-I') * 1e6; // mm^4
+    const denom = 3 * E4 * I4;
+    document.getElementById('def-out').textContent = denom !== 0 ? fmt((P4*Math.pow(L4,3))/denom) + ' mm' : '—';
+  }
+
+  document.querySelectorAll('.calc-inputs input').forEach(inp=>{
+    inp.addEventListener('input', calcAll);
+  });
+  calcAll();
+
+  // active nav link highlight
+  const navLinks = document.querySelectorAll('.ruler-links a');
+  const sections = [...navLinks].map(a => document.querySelector(a.getAttribute('href')));
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        navLinks.forEach(a=> a.style.color = (a.getAttribute('href')===id) ? 'var(--text)' : '');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+  sections.forEach(s => s && obs.observe(s));
+</script>
+
+</body>
+</html>
