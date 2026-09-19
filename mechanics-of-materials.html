@@ -241,6 +241,24 @@
     border:1px solid var(--teal-dim); padding:5px 10px; border-radius:20px;
   }
 
+  /* ---------- more link ---------- */
+  .more-row{
+    margin-top:32px; padding-top:20px;
+    border-top:1px solid var(--grid);
+    display:flex; justify-content:flex-end;
+  }
+  .more-link{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px;
+    letter-spacing:.04em; text-transform:uppercase;
+    color:var(--orange); text-decoration:none;
+    padding:8px 14px; border:1px solid var(--orange-dim); border-radius:20px;
+    transition:all .15s ease;
+  }
+  .more-link svg{ width:13px; height:13px; transition:transform .15s ease; }
+  .more-link:hover{ background:var(--orange); color:#ffffff; border-color:var(--orange); }
+  .more-link:hover svg{ transform:translateX(2px); }
+
   /* ---------- process steps ---------- */
   .steps{ position:relative; max-width:900px; }
   .steps::before{
@@ -467,6 +485,12 @@
       <div class="pill-row"><span class="pill">Ductile</span><span class="pill">Brittle</span><span class="pill">Poisson's ratio ν</span><span class="pill">Elastic modulus E</span></div>
     </div>
   </div>
+  <div class="more-row">
+    <a class="more-link" href="unit1-part1-loads-to-elastic-constants.html" target="_blank" rel="noopener">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 </section>
 
 <!-- 02 AXIAL LOADING -->
@@ -503,6 +527,12 @@
       </svg>
       <div class="cap"><span>ELONGATION UNDER TENSION</span><span>δ = PL/AE</span></div>
     </div>
+  </div>
+  <div class="more-row">
+    <a class="more-link" href="unit1-part2-axial-to-problems.html#axial" target="_blank" rel="noopener">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
   </div>
 </section>
 
