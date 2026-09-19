@@ -344,28 +344,20 @@
     .home-link{ min-width:50px; padding:0 15px; }
   }
 
-  /* ===== WHITE BACKGROUND / BLACK TEXT THEME ===== */
-  body{ background:#ffffff !important; color:#000000 !important; }
-  .ruler{ background:#ffffff !important; }
+  /* ===== WHITE BACKGROUND / BLACK BODY TEXT (accent colours kept) ===== */
+  body{ background:#ffffff; color:#000000; }
+  .ruler{ background:#ffffff; }
   .diagram, .curve-card, .formula-card, .calc-body, .calc-result,
   .calc-tabs button, .step-num, .calc-inputs input, .calc-inputs select,
-  .step-body .step-formula{ background:#ffffff !important; }
+  .step-body .step-formula{ background:#ffffff; }
   .curve-card, .formula-card, .calc-result,
   .step-body .step-formula{ border:1px solid rgba(0,0,0,0.28); box-shadow:none; }
-  h1,h2,h3,h4,h5,h6,p,span,div,a,b,strong,em,i,li,td,th,label,button,input,select,footer,figcaption{
-    color:#000000 !important;
-  }
-  .hero h1 em, .hero-stats .num, .hero-stats .lbl, .eyebrow, .pill, .step-num,
-  .section-head .index, .calc-result .r-value, .calc-result .r-label, .calc-result .r-sub,
-  .theory-table td.mono, .theory-table th, .ruler-brand, .home-link, .ruler-links a,
-  .ruler-links a::before, .step-body .step-tag, .calc-formula-note, .curve-card .sub,
-  .curve-card .tag, .formula-card .name, .formula-card .terms, .diagram .cap,
-  .copy p, .copy p.small, .step-body p{ color:#000000 !important; }
-  .pill{ border-color:rgba(0,0,0,0.45); }
-  .calc-tabs button.active{ background:#000000 !important; color:#ffffff !important; }
-  .home-link:hover{ background:#000000 !important; color:#ffffff !important; }
-  .ruler-links a:hover{ color:#000000 !important; text-decoration:underline; }
-  svg text{ fill:#000000 !important; }
+  .copy p, .copy p.small, .step-body p, .theory-table td,
+  .hero p.lede, .diagram .cap, .curve-card .sub, .curve-card .tag,
+  .formula-card .name, .formula-card .terms, .calc-result .r-label,
+  .calc-result .r-sub, .calc-formula-note, .step-body .step-tag,
+  .hero-stats .lbl, .theory-table th, .ruler-links a{ color:#000000; }
+  .calc-tabs button.active{ color:#000000; }
 </style>
 </head>
 <body>
