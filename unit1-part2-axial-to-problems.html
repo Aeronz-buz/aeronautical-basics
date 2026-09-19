@@ -46,6 +46,12 @@ a{color:var(--accent)}
   padding-top:env(safe-area-inset-top,0px)}
 .bar .inner{display:flex;gap:.85rem;align-items:center;height:3.5rem}
 .bar .mark{font-weight:600;font-size:.92rem;white-space:nowrap}
+.back{display:inline-flex;align-items:center;gap:.4rem;height:2.1rem;padding:0 .7rem;
+  border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--ink);
+  text-decoration:none;flex:none;font-size:.84rem;white-space:nowrap}
+.back:hover{border-color:var(--accent);color:var(--accent)}
+.back svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;flex:none}
+@media (max-width:560px){.back span{display:none}}
 .bar .mark span{color:var(--ink-3);font-weight:400}
 .bar .grow{flex:1}
 .srch{position:relative;flex:0 1 260px}
@@ -245,6 +251,10 @@ mark{background:#ffe27a;color:#1a1a1a;border-radius:2px}
 <body>
 
 <div class="bar"><div class="wrap inner">
+  <a class="back" href="mechanics-of-materials.html" title="Back to last page">
+    <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    <span>Back to last page</span>
+  </a>
   <div class="mark">Solid Mechanics <span>· Unit I</span></div>
   <div class="grow hide-sm"></div>
   <div class="srch">
