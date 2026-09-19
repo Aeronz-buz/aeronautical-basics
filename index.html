@@ -64,6 +64,12 @@ h2{font-size:32px;margin:0;letter-spacing:-1px}
 .eq{font:26px Georgia,serif;margin:7px 0}
 .terms{font-size:13px;color:#555850}
 .tag{display:inline-block;font:11px monospace;color:var(--teal);border:1px solid var(--teal);padding:3px 7px;margin:4px 4px 4px 0}
+.subgrid{margin-top:46px;padding-top:46px;border-top:1px solid var(--line)}
+.more-row{margin-top:44px;padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:flex-end}
+.more-link{display:inline-flex;align-items:center;gap:8px;font:12px monospace;letter-spacing:1px;text-transform:uppercase;color:var(--orange);text-decoration:none;padding:9px 16px;border:1px solid var(--orange);border-radius:2px;transition:all .15s ease}
+.more-link svg{width:13px;height:13px;transition:transform .15s ease}
+.more-link:hover{background:var(--orange);color:#fff}
+.more-link:hover svg{transform:translateX(3px)}
 .process{position:relative}
 .step{display:grid;grid-template-columns:58px 1fr;gap:18px;position:relative;padding-bottom:28px}
 .step:not(:last-child)::after{content:"";position:absolute;left:28px;top:58px;bottom:0;width:1px;background:var(--line)}
@@ -100,16 +106,15 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
   <div class="brand">AERO · REF</div>
   <div class="navlinks">
     <a href="#intro" data-n="00">Introduction</a>
-    <a href="#aero" data-n="01">Aerodynamics</a>
-    <a href="#structures" data-n="02">Structures</a>
+    <a href="#structures" data-n="01">Structures</a>
+    <a href="#aero" data-n="02">Aerodynamics</a>
     <a href="#propulsion" data-n="03">Propulsion</a>
     <a href="#flight" data-n="04">Flight Mechanics</a>
     <a href="#controls" data-n="05">Flight Control</a>
-    <a href="#materials" data-n="06">Materials</a>
-    <a href="#maintenance" data-n="07">Maintenance</a>
-    <a href="#process" data-n="08">Solving Process</a>
-    <a href="#calculator" data-n="09">Calculator</a>
-    <a href="mechanics-of-materials.html" data-n="10">
+    <a href="#maintenance" data-n="06">Maintenance</a>
+    <a href="#process" data-n="07">Solving Process</a>
+    <a href="#calculator" data-n="08">Calculator</a>
+    <a href="mechanics-of-materials.html" data-n="09">
     Mechanics of Materials
   </a>
 
@@ -123,8 +128,8 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
     <h1>Aircraft.<br>Engineering.<br>Explained.</h1>
     <p>A compact technical reference for students and teachers covering aerodynamics, structures, propulsion, flight mechanics, control systems and aircraft maintenance.</p>
     <div class="stats">
-      <div class="stat"><b>07</b><span>CORE TOPICS</span></div>
-      <div class="stat"><b>10</b><span>REFERENCE SECTIONS</span></div>
+      <div class="stat"><b>06</b><span>CORE TOPICS</span></div>
+      <div class="stat"><b>09</b><span>REFERENCE SECTIONS</span></div>
       <div class="stat"><b>∞</b><span>EXTENDABLE</span></div>
     </div>
   </div>
@@ -150,31 +155,9 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
   </div>
 </section>
 
-<section class="section" id="aero">
-<div class="section-head"><span class="index">01</span><h2>Aerodynamics</h2><span class="rule"></span></div>
-<div class="grid">
-<div class="diagram">
-<svg viewBox="0 0 500 300">
- <path d="M45 190 Q150 80 430 145 Q455 151 430 160 Q170 190 45 205 Z" fill="none" stroke="#22252a" stroke-width="3"/>
- <path d="M20 125 Q180 65 455 105 M20 155 Q180 100 455 135 M20 225 Q180 260 455 205" fill="none" stroke="#3fa9a4"/>
- <path d="M270 160 L270 75" stroke="#e85d2c" stroke-width="3"/>
- <polygon points="270,70 264,82 276,82" fill="#e85d2c"/>
- <text x="285" y="88" fill="#e85d2c" font-family="monospace">LIFT</text>
- <path d="M45 198 L5 198" stroke="#e85d2c" stroke-width="3"/>
- <text x="5" y="185" fill="#e85d2c" font-family="monospace">DRAG</text>
-</svg>
-</div>
-<div class="copy">
-<h3>Forces on an aircraft</h3>
-<p>Aircraft performance is strongly influenced by lift, drag, thrust and weight. The wing generates aerodynamic lift as air moves around its geometry.</p>
-<div class="formula"><div class="name">Lift equation</div><div class="eq">L = ½ ρ V² S C<sub>L</sub></div><div class="terms"><b>ρ</b> density · <b>V</b> velocity · <b>S</b> wing area · <b>C<sub>L</sub></b> lift coefficient</div></div>
-<span class="tag">Lift</span><span class="tag">Drag</span><span class="tag">Airfoil</span><span class="tag">Mach</span>
-</div>
-</div>
-</section>
-
 <section class="section" id="structures">
-<div class="section-head"><span class="index">02</span><h2>Aircraft Structures</h2><span class="rule"></span></div>
+<div class="section-head"><span class="index">01</span><h2>Structures &amp; Materials</h2><span class="rule"></span></div>
+
 <div class="grid">
 <div class="copy">
 <h3>Loads, stress and structural integrity</h3>
@@ -193,6 +176,55 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
  <text x="45" y="105" fill="#e85d2c" font-family="monospace">P →</text>
  <text x="395" y="105" fill="#e85d2c" font-family="monospace">← P</text>
 </svg>
+</div>
+</div>
+
+<div class="grid subgrid">
+<div class="copy">
+<h3>Materials for strength and weight efficiency</h3>
+<p>Aircraft materials are selected considering strength-to-weight ratio, fatigue, corrosion, temperature capability, manufacturability and cost.</p>
+<div class="formula"><div class="name">Specific strength</div><div class="eq">Specific strength = Strength / Density</div><div class="terms">Useful for comparing lightweight structural materials.</div></div>
+<span class="tag">Aluminium</span><span class="tag">Titanium</span><span class="tag">Composites</span><span class="tag">Superalloys</span>
+</div>
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <rect x="70" y="70" width="105" height="160" fill="none" stroke="#9299a3" stroke-width="3"/>
+ <rect x="198" y="95" width="105" height="135" fill="none" stroke="#3fa9a4" stroke-width="3"/>
+ <rect x="326" y="115" width="105" height="115" fill="none" stroke="#e85d2c" stroke-width="3"/>
+ <text x="88" y="255" fill="#9299a3" font-family="monospace">AL</text>
+ <text x="215" y="255" fill="#3fa9a4" font-family="monospace">TI</text>
+ <text x="338" y="255" fill="#e85d2c" font-family="monospace">CFRP</text>
+</svg>
+</div>
+</div>
+
+<div class="more-row">
+<a class="more-link" href="mechanics-of-materials.html" target="_blank" rel="noopener">
+More…
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+</a>
+</div>
+</section>
+
+<section class="section" id="aero">
+<div class="section-head"><span class="index">02</span><h2>Aerodynamics</h2><span class="rule"></span></div>
+<div class="grid">
+<div class="diagram">
+<svg viewBox="0 0 500 300">
+ <path d="M45 190 Q150 80 430 145 Q455 151 430 160 Q170 190 45 205 Z" fill="none" stroke="#22252a" stroke-width="3"/>
+ <path d="M20 125 Q180 65 455 105 M20 155 Q180 100 455 135 M20 225 Q180 260 455 205" fill="none" stroke="#3fa9a4"/>
+ <path d="M270 160 L270 75" stroke="#e85d2c" stroke-width="3"/>
+ <polygon points="270,70 264,82 276,82" fill="#e85d2c"/>
+ <text x="285" y="88" fill="#e85d2c" font-family="monospace">LIFT</text>
+ <path d="M45 198 L5 198" stroke="#e85d2c" stroke-width="3"/>
+ <text x="5" y="185" fill="#e85d2c" font-family="monospace">DRAG</text>
+</svg>
+</div>
+<div class="copy">
+<h3>Forces on an aircraft</h3>
+<p>Aircraft performance is strongly influenced by lift, drag, thrust and weight. The wing generates aerodynamic lift as air moves around its geometry.</p>
+<div class="formula"><div class="name">Lift equation</div><div class="eq">L = ½ ρ V² S C<sub>L</sub></div><div class="terms"><b>ρ</b> density · <b>V</b> velocity · <b>S</b> wing area · <b>C<sub>L</sub></b> lift coefficient</div></div>
+<span class="tag">Lift</span><span class="tag">Drag</span><span class="tag">Airfoil</span><span class="tag">Mach</span>
 </div>
 </div>
 </section>
@@ -267,30 +299,8 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
 </div>
 </section>
 
-<section class="section" id="materials">
-<div class="section-head"><span class="index">06</span><h2>Aircraft Materials</h2><span class="rule"></span></div>
-<div class="grid">
-<div class="copy">
-<h3>Materials for strength and weight efficiency</h3>
-<p>Aircraft materials are selected considering strength-to-weight ratio, fatigue, corrosion, temperature capability, manufacturability and cost.</p>
-<div class="formula"><div class="name">Specific strength</div><div class="eq">Specific strength = Strength / Density</div><div class="terms">Useful for comparing lightweight structural materials.</div></div>
-<span class="tag">Aluminium</span><span class="tag">Titanium</span><span class="tag">Composites</span><span class="tag">Superalloys</span>
-</div>
-<div class="diagram">
-<svg viewBox="0 0 500 300">
- <rect x="70" y="70" width="105" height="160" fill="none" stroke="#9299a3" stroke-width="3"/>
- <rect x="198" y="95" width="105" height="135" fill="none" stroke="#3fa9a4" stroke-width="3"/>
- <rect x="326" y="115" width="105" height="115" fill="none" stroke="#e85d2c" stroke-width="3"/>
- <text x="88" y="255" fill="#9299a3" font-family="monospace">AL</text>
- <text x="215" y="255" fill="#3fa9a4" font-family="monospace">TI</text>
- <text x="338" y="255" fill="#e85d2c" font-family="monospace">CFRP</text>
-</svg>
-</div>
-</div>
-</section>
-
 <section class="section" id="maintenance">
-<div class="section-head"><span class="index">07</span><h2>Aircraft Maintenance</h2><span class="rule"></span></div>
+<div class="section-head"><span class="index">06</span><h2>Aircraft Maintenance</h2><span class="rule"></span></div>
 <div class="grid">
 <div class="diagram">
 <svg viewBox="0 0 500 300">
@@ -311,7 +321,7 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
 </section>
 
 <section class="section" id="process">
-<div class="section-head"><span class="index">08</span><h2>Solving Process</h2><span class="rule"></span></div>
+<div class="section-head"><span class="index">07</span><h2>Solving Process</h2><span class="rule"></span></div>
 <div class="process">
  <div class="step"><div class="num">01</div><div><h3>Define the problem</h3><p>Identify the aircraft component, operating condition, known data and required output.</p></div></div>
  <div class="step"><div class="num">02</div><div><h3>Idealize the system</h3><p>Prepare a clear sketch, free-body diagram or aerodynamic model and state assumptions.</p></div></div>
@@ -322,7 +332,7 @@ footer{border-top:1px solid var(--line);padding:35px 0 60px;color:var(--muted);f
 </section>
 
 <section class="section" id="calculator">
-<div class="section-head"><span class="index">09</span><h2>Engineering Calculator</h2><span class="rule"></span></div>
+<div class="section-head"><span class="index">08</span><h2>Engineering Calculator</h2><span class="rule"></span></div>
 <div class="calc">
 <div class="tabs">
 <button class="active" data-tab="lift">Lift</button>
