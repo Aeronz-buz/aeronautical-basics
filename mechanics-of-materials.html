@@ -8,21 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#14161a;
-    --panel:#1b1e23;
-    --panel-2:#20242a;
+    --bg:#dff1fb;
+    --panel:#eef8fd;
+    --panel-2:#e8f5fb;
     --paper:#f1eee3;
     --paper-2:#e8e3d3;
     --ink:#191a17;
-    --text:#e7e4da;
-    --muted:#8b909a;
-    --muted-2:#5b6169;
+    --text:#18313f;
+    --muted:#5f7480;
+    --muted-2:#718894;
     --orange:#e85d2c;
     --orange-dim:#a8461f;
     --teal:#3fa9a4;
     --teal-dim:#2c7975;
-    --grid:rgba(231,228,218,0.07);
-    --grid-strong:rgba(231,228,218,0.14);
+    --grid:rgba(42,101,130,0.09);
+    --grid-strong:rgba(42,101,130,0.18);
     --radius:2px;
   }
   *{box-sizing:border-box;}
@@ -52,7 +52,7 @@
   .ruler{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; gap:0;
-    background:rgba(20,22,26,0.92);
+    background:rgba(223,241,251,0.94);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--grid-strong);
     overflow-x:auto;
@@ -69,6 +69,29 @@
     white-space:nowrap;
   }
   .ruler-brand svg{width:16px;height:16px;}
+
+  .home-link{
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    min-width:82px;
+    height:48px;
+    padding:0 14px;
+    color:var(--orange);
+    text-decoration:none;
+    border-right:1px solid var(--grid-strong);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11px;
+    letter-spacing:.04em;
+    transition:all .15s ease;
+  }
+  .home-link svg{width:18px;height:18px;}
+  .home-link:hover{
+    color:#ffffff;
+    background:var(--orange);
+  }
   .ruler-links{ display:flex; }
   .ruler-links a{
     flex:none;
@@ -317,6 +340,8 @@
     .grid-2.rev .diagram{ order:0; }
     .calc-body{ grid-template-columns:1fr; }
     .ruler-brand{ display:none; }
+    .home-link span{ display:none; }
+    .home-link{ min-width:50px; padding:0 15px; }
   }
 </style>
 </head>
@@ -327,6 +352,15 @@
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 20 L20 4 M4 4h16v16"/></svg>
     MOM · REF
   </div>
+    <a class="home-link" href="index(1).html" aria-label="Back to Home" title="Back to Home">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M3 11.5 12 4l9 7.5"></path>
+        <path d="M5.5 10.5V20h13v-9.5"></path>
+        <path d="M9.5 20v-5.5h5V20"></path>
+      </svg>
+      <span>HOME</span>
+    </a>
   <div class="ruler-links">
     <a href="#intro" data-n="00">Introduction</a>
     <a href="#stress-strain" data-n="01">Stress &amp; Strain</a>
