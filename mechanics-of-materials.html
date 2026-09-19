@@ -8,21 +8,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#dff1fb;
-    --panel:#eef8fd;
-    --panel-2:#e8f5fb;
-    --paper:#f1eee3;
-    --paper-2:#e8e3d3;
-    --ink:#191a17;
-    --text:#18313f;
-    --muted:#5f7480;
-    --muted-2:#718894;
+    --bg:#ffffff;
+    --panel:#ffffff;
+    --panel-2:#ffffff;
+    --paper:#ffffff;
+    --paper-2:#ffffff;
+    --ink:#000000;
+    --text:#000000;
+    --muted:#000000;
+    --muted-2:#000000;
     --orange:#e85d2c;
     --orange-dim:#a8461f;
     --teal:#3fa9a4;
     --teal-dim:#2c7975;
-    --grid:rgba(42,101,130,0.09);
-    --grid-strong:rgba(42,101,130,0.18);
+    --grid:rgba(0,0,0,0.10);
+    --grid-strong:rgba(0,0,0,0.28);
     --radius:2px;
   }
   *{box-sizing:border-box;}
@@ -52,7 +52,7 @@
   .ruler{
     position:sticky; top:0; z-index:50;
     display:flex; align-items:center; gap:0;
-    background:rgba(223,241,251,0.94);
+    background:rgba(255,255,255,0.96);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--grid-strong);
     overflow-x:auto;
@@ -156,7 +156,7 @@
     background:var(--paper);
     border-radius:var(--radius);
     padding:22px 22px 16px;
-    box-shadow:0 24px 60px -20px rgba(0,0,0,0.6);
+    box-shadow:0 24px 60px -20px rgba(0,0,0,0.15);
     position:relative;
   }
   .curve-card .tag{
@@ -168,7 +168,7 @@
     color:var(--ink); font-size:13px; margin:0 0 4px;
     font-family:'IBM Plex Mono',monospace; font-weight:600; letter-spacing:.02em;
   }
-  .curve-card .sub{ color:#6b6a5f; font-size:11px; margin-bottom:10px; font-family:'IBM Plex Mono',monospace;}
+  .curve-card .sub{ color:#000000; font-size:11px; margin-bottom:10px; font-family:'IBM Plex Mono',monospace;}
   .curve-path{
     stroke:var(--orange);
     stroke-width:2.5;
@@ -213,7 +213,7 @@
     margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted-2);
     display:flex; justify-content:space-between;
   }
-  .copy p{ line-height:1.7; color:#c8c5ba; font-size:15px; }
+  .copy p{ line-height:1.7; color:#000000; font-size:15px; }
   .copy p.small{ color:var(--muted); font-size:13.5px; }
 
   .formula-card{
@@ -223,14 +223,14 @@
     margin:18px 0;
   }
   .formula-card .name{
-    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#7a7869;
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:#000000;
     text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px;
   }
   .formula-card .eq{
     font-family:'IBM Plex Mono',monospace; font-size:20px; color:var(--ink); font-weight:600;
   }
   .formula-card .terms{
-    margin-top:10px; font-size:12px; color:#5f5d52; line-height:1.9;
+    margin-top:10px; font-size:12px; color:#000000; line-height:1.9;
     font-family:'IBM Plex Mono',monospace;
   }
   .formula-card .terms b{ color:var(--ink); }
@@ -269,7 +269,7 @@
     font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--muted-2);
     border:1px solid var(--grid-strong); padding:2px 8px; border-radius:20px; text-transform:uppercase;
   }
-  .step-body p{ margin:0; line-height:1.65; color:#c8c5ba; font-size:14.5px; max-width:68ch; }
+  .step-body p{ margin:0; line-height:1.65; color:#000000; font-size:14.5px; max-width:68ch; }
   .step-body .step-formula{
     margin-top:10px; display:inline-block;
     font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--orange-dim);
@@ -311,15 +311,15 @@
     background:var(--paper); border-radius:var(--radius); padding:22px;
     display:flex; flex-direction:column; justify-content:center;
   }
-  .calc-result .r-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#7a7869; text-transform:uppercase; letter-spacing:.06em; }
+  .calc-result .r-label{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:#000000; text-transform:uppercase; letter-spacing:.06em; }
   .calc-result .r-value{ font-family:'IBM Plex Mono',monospace; font-size:32px; color:var(--orange-dim); font-weight:700; margin:6px 0 2px; word-break:break-word; }
-  .calc-result .r-sub{ font-size:11.5px; color:#6b6a5f; font-family:'IBM Plex Mono',monospace; }
+  .calc-result .r-sub{ font-size:11.5px; color:#000000; font-family:'IBM Plex Mono',monospace; }
 
   /* ---------- table ---------- */
   .theory-table{ width:100%; border-collapse:collapse; margin-top:8px; }
   .theory-table th, .theory-table td{
     text-align:left; padding:12px 14px; border-bottom:1px solid var(--grid-strong);
-    font-size:13px; color:#c8c5ba;
+    font-size:13px; color:#000000;
   }
   .theory-table th{
     font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--muted); text-transform:uppercase; letter-spacing:.05em;
@@ -343,6 +343,29 @@
     .home-link span{ display:none; }
     .home-link{ min-width:50px; padding:0 15px; }
   }
+
+  /* ===== WHITE BACKGROUND / BLACK TEXT THEME ===== */
+  body{ background:#ffffff !important; color:#000000 !important; }
+  .ruler{ background:#ffffff !important; }
+  .diagram, .curve-card, .formula-card, .calc-body, .calc-result,
+  .calc-tabs button, .step-num, .calc-inputs input, .calc-inputs select,
+  .step-body .step-formula{ background:#ffffff !important; }
+  .curve-card, .formula-card, .calc-result,
+  .step-body .step-formula{ border:1px solid rgba(0,0,0,0.28); box-shadow:none; }
+  h1,h2,h3,h4,h5,h6,p,span,div,a,b,strong,em,i,li,td,th,label,button,input,select,footer,figcaption{
+    color:#000000 !important;
+  }
+  .hero h1 em, .hero-stats .num, .hero-stats .lbl, .eyebrow, .pill, .step-num,
+  .section-head .index, .calc-result .r-value, .calc-result .r-label, .calc-result .r-sub,
+  .theory-table td.mono, .theory-table th, .ruler-brand, .home-link, .ruler-links a,
+  .ruler-links a::before, .step-body .step-tag, .calc-formula-note, .curve-card .sub,
+  .curve-card .tag, .formula-card .name, .formula-card .terms, .diagram .cap,
+  .copy p, .copy p.small, .step-body p{ color:#000000 !important; }
+  .pill{ border-color:rgba(0,0,0,0.45); }
+  .calc-tabs button.active{ background:#000000 !important; color:#ffffff !important; }
+  .home-link:hover{ background:#000000 !important; color:#ffffff !important; }
+  .ruler-links a:hover{ color:#000000 !important; text-decoration:underline; }
+  svg text{ fill:#000000 !important; }
 </style>
 </head>
 <body>
@@ -393,18 +416,18 @@
     <h3>Stress–Strain Diagram</h3>
     <div class="sub">engineering stress vs. engineering strain</div>
     <svg viewBox="0 0 380 240" aria-label="Stress strain curve for mild steel showing elastic region, yield plateau, strain hardening, and fracture">
-      <line x1="40" y1="200" x2="360" y2="200" stroke="#c9c6b8" stroke-width="1"/>
-      <line x1="40" y1="20" x2="40" y2="200" stroke="#c9c6b8" stroke-width="1"/>
-      <text x="200" y="228" font-family="IBM Plex Mono" font-size="10" fill="#7a7869" text-anchor="middle">STRAIN (ε)</text>
-      <text x="18" y="110" font-family="IBM Plex Mono" font-size="10" fill="#7a7869" transform="rotate(-90 18 110)" text-anchor="middle">STRESS (σ)</text>
+      <line x1="40" y1="200" x2="360" y2="200" stroke="#555555" stroke-width="1"/>
+      <line x1="40" y1="20" x2="40" y2="200" stroke="#555555" stroke-width="1"/>
+      <text x="200" y="228" font-family="IBM Plex Mono" font-size="10" fill="#000000" text-anchor="middle">STRAIN (ε)</text>
+      <text x="18" y="110" font-family="IBM Plex Mono" font-size="10" fill="#000000" transform="rotate(-90 18 110)" text-anchor="middle">STRESS (σ)</text>
       <path class="curve-elastic" d="M40,200 L95,90"/>
       <path class="curve-path" d="M40,200 L95,90 L150,86 L230,60 L290,40 L320,70 L335,120"/>
       <circle cx="95" cy="90" r="3" fill="#e85d2c"/>
-      <text x="100" y="85" font-family="IBM Plex Mono" font-size="9" fill="#19180f">yield</text>
+      <text x="100" y="85" font-family="IBM Plex Mono" font-size="9" fill="#000000">yield</text>
       <circle cx="290" cy="40" r="3" fill="#e85d2c"/>
-      <text x="255" y="32" font-family="IBM Plex Mono" font-size="9" fill="#19180f">ultimate</text>
+      <text x="255" y="32" font-family="IBM Plex Mono" font-size="9" fill="#000000">ultimate</text>
       <circle cx="335" cy="120" r="3" fill="#e85d2c"/>
-      <text x="300" y="135" font-family="IBM Plex Mono" font-size="9" fill="#19180f">fracture</text>
+      <text x="300" y="135" font-family="IBM Plex Mono" font-size="9" fill="#000000">fracture</text>
     </svg>
     <div class="cap"><span>ELASTIC → PLASTIC → NECKING</span><span>E = slope</span></div>
   </div>
@@ -416,9 +439,9 @@
   <div class="grid-2">
     <div class="diagram">
       <svg viewBox="0 0 380 200" aria-label="Bar in tension with internal cross section showing distributed normal stress">
-        <line x1="30" y1="100" x2="130" y2="100" stroke="#8b909a" stroke-width="6"/>
-        <rect x="130" y="70" width="120" height="60" fill="none" stroke="#e7e4da" stroke-width="2"/>
-        <line x1="250" y1="100" x2="350" y2="100" stroke="#8b909a" stroke-width="6"/>
+        <line x1="30" y1="100" x2="130" y2="100" stroke="#333333" stroke-width="6"/>
+        <rect x="130" y="70" width="120" height="60" fill="none" stroke="#444444" stroke-width="2"/>
+        <line x1="250" y1="100" x2="350" y2="100" stroke="#333333" stroke-width="6"/>
         <line x1="190" y1="70" x2="190" y2="130" stroke="#3fa9a4" stroke-width="1.5" stroke-dasharray="3 3"/>
         <g stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow)">
           <line x1="185" y1="75" x2="205" y2="75"/>
@@ -429,9 +452,9 @@
           <line x1="185" y1="125" x2="205" y2="125"/>
         </g>
         <defs><marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#e85d2c"/></marker></defs>
-        <line x1="15" y1="150" x2="20" y2="140" stroke="#e7e4da" stroke-width="1"/>
-        <text x="60" y="60" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">P →</text>
-        <text x="290" y="60" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">← P</text>
+        <line x1="15" y1="150" x2="20" y2="140" stroke="#444444" stroke-width="1"/>
+        <text x="60" y="60" font-family="IBM Plex Mono" font-size="10" fill="#333333">P →</text>
+        <text x="290" y="60" font-family="IBM Plex Mono" font-size="10" fill="#333333">← P</text>
         <text x="150" y="150" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">section cut</text>
       </svg>
       <div class="cap"><span>UNIFORM AXIAL STRESS</span><span>σ ACROSS AREA A</span></div>
@@ -474,8 +497,8 @@
     </div>
     <div class="diagram">
       <svg viewBox="0 0 380 200" aria-label="Rod before and after axial elongation under load P">
-        <text x="20" y="30" font-family="IBM Plex Mono" font-size="10" fill="#8b909a">UNLOADED</text>
-        <rect x="20" y="40" width="200" height="18" fill="none" stroke="#5b6169" stroke-width="1.5"/>
+        <text x="20" y="30" font-family="IBM Plex Mono" font-size="10" fill="#333333">UNLOADED</text>
+        <rect x="20" y="40" width="200" height="18" fill="none" stroke="#333333" stroke-width="1.5"/>
         <text x="20" y="100" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">LOADED (+δ)</text>
         <rect x="20" y="110" width="260" height="18" fill="none" stroke="#e85d2c" stroke-width="1.5"/>
         <line x1="280" y1="100" x2="330" y2="100" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow2)"/>
@@ -497,19 +520,19 @@
   <div class="grid-2">
     <div class="diagram">
       <svg viewBox="0 0 380 200" aria-label="Circular shaft under torque showing shear stress distribution and angle of twist">
-        <ellipse cx="90" cy="100" rx="20" ry="45" fill="none" stroke="#e7e4da" stroke-width="2"/>
-        <rect x="90" y="55" width="200" height="90" fill="none" stroke="#e7e4da" stroke-width="2"/>
-        <ellipse cx="290" cy="100" rx="20" ry="45" fill="none" stroke="#e7e4da" stroke-width="2"/>
+        <ellipse cx="90" cy="100" rx="20" ry="45" fill="none" stroke="#444444" stroke-width="2"/>
+        <rect x="90" y="55" width="200" height="90" fill="none" stroke="#444444" stroke-width="2"/>
+        <ellipse cx="290" cy="100" rx="20" ry="45" fill="none" stroke="#444444" stroke-width="2"/>
         <path d="M70,70 A25,25 0 0,1 70,130" fill="none" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow3)"/>
         <defs><marker id="arrow3" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 z" fill="#e85d2c"/></marker></defs>
         <path d="M310,130 A25,25 0 0,1 310,70" fill="none" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow3)"/>
         <text x="40" y="70" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">T</text>
         <text x="335" y="130" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">T</text>
         <line x1="290" y1="100" x2="290" y2="55" stroke="#3fa9a4" stroke-width="1.5"/>
-        <line x1="290" y1="100" x2="285" y2="58" stroke="#8b909a" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="290" y1="100" x2="285" y2="58" stroke="#333333" stroke-width="1.5" stroke-dasharray="2 2"/>
         <path d="M290,80 A20,20 0 0,0 285,58" fill="none" stroke="#3fa9a4" stroke-width="1"/>
         <text x="298" y="72" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">φ</text>
-        <text x="150" y="35" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">shear stress τ ∝ r (max at surface)</text>
+        <text x="150" y="35" font-family="IBM Plex Mono" font-size="9" fill="#333333">shear stress τ ∝ r (max at surface)</text>
       </svg>
       <div class="cap"><span>CIRCULAR SHAFT IN TORSION</span><span>τ = Tr/J</span></div>
     </div>
@@ -545,21 +568,21 @@
     </div>
     <div class="diagram">
       <svg viewBox="0 0 380 220" aria-label="Simply supported beam with a center point load, plus its shear force and bending moment diagrams">
-        <line x1="30" y1="60" x2="350" y2="60" stroke="#e7e4da" stroke-width="3"/>
-        <polygon points="30,60 20,78 40,78" fill="none" stroke="#8b909a" stroke-width="1.5"/>
-        <polygon points="350,60 340,78 360,78" fill="none" stroke="#8b909a" stroke-width="1.5"/>
+        <line x1="30" y1="60" x2="350" y2="60" stroke="#444444" stroke-width="3"/>
+        <polygon points="30,60 20,78 40,78" fill="none" stroke="#333333" stroke-width="1.5"/>
+        <polygon points="350,60 340,78 360,78" fill="none" stroke="#333333" stroke-width="1.5"/>
         <line x1="190" y1="20" x2="190" y2="55" stroke="#e85d2c" stroke-width="2" marker-end="url(#arrow4)"/>
         <defs><marker id="arrow4" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
         <text x="196" y="30" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
 
         <text x="30" y="98" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">V(x)</text>
-        <line x1="30" y1="110" x2="350" y2="110" stroke="#5b6169" stroke-width="1"/>
+        <line x1="30" y1="110" x2="350" y2="110" stroke="#333333" stroke-width="1"/>
         <line x1="30" y1="95" x2="190" y2="95" stroke="#3fa9a4" stroke-width="2"/>
         <line x1="190" y1="95" x2="190" y2="125" stroke="#3fa9a4" stroke-width="2"/>
         <line x1="190" y1="125" x2="350" y2="125" stroke="#3fa9a4" stroke-width="2"/>
 
         <text x="30" y="150" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">M(x)</text>
-        <line x1="30" y1="200" x2="350" y2="200" stroke="#5b6169" stroke-width="1"/>
+        <line x1="30" y1="200" x2="350" y2="200" stroke="#333333" stroke-width="1"/>
         <path d="M30,200 L190,160 L350,200" fill="none" stroke="#e85d2c" stroke-width="2"/>
       </svg>
       <div class="cap"><span>SIMPLE BEAM, CENTER LOAD</span><span>V &amp; M DIAGRAMS</span></div>
@@ -573,15 +596,15 @@
   <div class="grid-2">
     <div class="diagram">
       <svg viewBox="0 0 380 210" aria-label="Beam cross section showing linear bending stress distribution, tension below neutral axis and compression above">
-        <rect x="60" y="30" width="70" height="140" fill="none" stroke="#e7e4da" stroke-width="2"/>
-        <line x1="60" y1="100" x2="130" y2="100" stroke="#8b909a" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="132" y="104" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">N.A.</text>
+        <rect x="60" y="30" width="70" height="140" fill="none" stroke="#444444" stroke-width="2"/>
+        <line x1="60" y1="100" x2="130" y2="100" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="132" y="104" font-family="IBM Plex Mono" font-size="9" fill="#333333">N.A.</text>
         <line x1="180" y1="30" x2="280" y2="30" stroke="#3fa9a4" stroke-width="1"/>
         <line x1="180" y1="100" x2="180" y2="100" stroke="#3fa9a4" stroke-width="1"/>
         <line x1="180" y1="170" x2="280" y2="170" stroke="#e85d2c" stroke-width="1"/>
         <path d="M180,100 L260,35" stroke="#3fa9a4" stroke-width="2" fill="none"/>
         <path d="M180,100 L260,165" stroke="#e85d2c" stroke-width="2" fill="none"/>
-        <line x1="180" y1="30" x2="180" y2="170" stroke="#5b6169" stroke-width="1"/>
+        <line x1="180" y1="30" x2="180" y2="170" stroke="#333333" stroke-width="1"/>
         <text x="245" y="45" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">compression</text>
         <text x="255" y="185" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">tension</text>
       </svg>
@@ -623,8 +646,8 @@
     </div>
     <div class="diagram">
       <svg viewBox="0 0 380 200" aria-label="Cantilever beam fixed at one end deflecting downward under an end point load">
-        <rect x="20" y="40" width="20" height="120" fill="#5b6169"/>
-        <line x1="40" y1="90" x2="330" y2="90" stroke="#5b6169" stroke-width="2" stroke-dasharray="4 4"/>
+        <rect x="20" y="40" width="20" height="120" fill="#333333"/>
+        <line x1="40" y1="90" x2="330" y2="90" stroke="#333333" stroke-width="2" stroke-dasharray="4 4"/>
         <path d="M40,90 C 150,92 250,100 330,155" fill="none" stroke="#e85d2c" stroke-width="2.5"/>
         <line x1="330" y1="155" x2="330" y2="120" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow5)"/>
         <defs><marker id="arrow5" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
@@ -643,18 +666,18 @@
   <div class="grid-2">
     <div class="diagram">
       <svg viewBox="0 0 380 220" aria-label="Mohr's circle diagram plotting normal stress against shear stress with principal stress points marked">
-        <line x1="40" y1="110" x2="350" y2="110" stroke="#c9c6b8" stroke-width="1"/>
-        <line x1="195" y1="20" x2="195" y2="200" stroke="#c9c6b8" stroke-width="1"/>
+        <line x1="40" y1="110" x2="350" y2="110" stroke="#555555" stroke-width="1"/>
+        <line x1="195" y1="20" x2="195" y2="200" stroke="#555555" stroke-width="1"/>
         <circle cx="220" cy="110" r="75" fill="none" stroke="#e85d2c" stroke-width="2"/>
         <circle cx="145" cy="110" r="3" fill="#3fa9a4"/>
         <circle cx="295" cy="110" r="3" fill="#3fa9a4"/>
         <text x="120" y="130" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">σ_min</text>
         <text x="285" y="130" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">σ_max</text>
-        <line x1="220" y1="110" x2="270" y2="70" stroke="#8b909a" stroke-width="1.5" stroke-dasharray="2 2"/>
+        <line x1="220" y1="110" x2="270" y2="70" stroke="#333333" stroke-width="1.5" stroke-dasharray="2 2"/>
         <circle cx="270" cy="70" r="3" fill="#e85d2c"/>
         <text x="270" y="60" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">τ_max</text>
-        <text x="355" y="114" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">σ</text>
-        <text x="200" y="16" font-family="IBM Plex Mono" font-size="9" fill="#8b909a">τ</text>
+        <text x="355" y="114" font-family="IBM Plex Mono" font-size="9" fill="#333333">σ</text>
+        <text x="200" y="16" font-family="IBM Plex Mono" font-size="9" fill="#333333">τ</text>
       </svg>
       <div class="cap"><span>PRINCIPAL STRESSES</span><span>GRAPHICAL TRANSFORMATION</span></div>
     </div>
