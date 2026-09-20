@@ -414,9 +414,9 @@
     <a href="#stress-strain" data-n="01">Stress &amp; Strain</a>
     <a href="#axial" data-n="02">Axial Loading</a>
     <a href="#shear-bending" data-n="03">Shear &amp; Bending</a>
-    <a href="#torsion" data-n="04">Torsion</a>
-    <a href="#bending-stress" data-n="05">Bending Stress</a>
-    <a href="#deflection" data-n="06">Deflection</a>
+    <a href="#bending-stress" data-n="04">Bending Stress</a>
+    <a href="#deflection" data-n="05">Deflection</a>
+    <a href="#torsion" data-n="06">Torsion</a>
     <a href="#combined" data-n="07">Combined Loading</a>
     <a href="#failure" data-n="08">Failure Theories</a>
     <a href="#process" data-n="09">Solving Process</a>
@@ -587,11 +587,99 @@
       <div class="cap"><span>SIMPLE BEAM, CENTER LOAD</span><span>V &amp; M DIAGRAMS</span></div>
     </div>
   </div>
+  <div class="more-row">
+    <a class="more-link" href="unit2-part1-beams-and-sfd-bmd.html">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 </section>
 
-<!-- 04 TORSION -->
+<!-- 04 BENDING STRESS -->
+<section class="section" id="bending-stress">
+  <div class="section-head"><span class="index">04</span><h2>Bending Stress</h2><span class="rule"></span></div>
+  <div class="grid-2">
+    <div class="diagram">
+      <svg viewBox="0 0 380 210" aria-label="Beam cross section showing linear bending stress distribution, tension below neutral axis and compression above">
+        <rect x="60" y="30" width="70" height="140" fill="none" stroke="#444444" stroke-width="2"/>
+        <line x1="60" y1="100" x2="130" y2="100" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
+        <text x="132" y="104" font-family="IBM Plex Mono" font-size="9" fill="#333333">N.A.</text>
+        <line x1="180" y1="30" x2="280" y2="30" stroke="#3fa9a4" stroke-width="1"/>
+        <line x1="180" y1="100" x2="180" y2="100" stroke="#3fa9a4" stroke-width="1"/>
+        <line x1="180" y1="170" x2="280" y2="170" stroke="#e85d2c" stroke-width="1"/>
+        <path d="M180,100 L260,35" stroke="#3fa9a4" stroke-width="2" fill="none"/>
+        <path d="M180,100 L260,165" stroke="#e85d2c" stroke-width="2" fill="none"/>
+        <line x1="180" y1="30" x2="180" y2="170" stroke="#333333" stroke-width="1"/>
+        <text x="245" y="45" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">compression</text>
+        <text x="255" y="185" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">tension</text>
+      </svg>
+      <div class="cap"><span>LINEAR STRESS DISTRIBUTION</span><span>σ = My/I</span></div>
+    </div>
+    <div class="copy">
+      <p>A beam in pure bending develops compressive stress on one side of the cross-section and tensile stress on the other, with a linear transition through an unstressed <b style="color:var(--text)">neutral axis</b>. Stress is highest at the outer fibers — which is why I-beams put most of their material as far from the neutral axis as possible.</p>
+      <div class="formula-card">
+        <div class="name">Flexure Formula</div>
+        <div class="eq">σ = M·y / I</div>
+        <div class="terms"><b>M</b> bending moment &nbsp; <b>y</b> distance from neutral axis &nbsp; <b>I</b> moment of inertia</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Horizontal Shear Stress in Beams</div>
+        <div class="eq">τ = V·Q / (I·b)</div>
+        <div class="terms"><b>Q</b> first moment of area above the cut &nbsp; <b>b</b> width at the cut</div>
+      </div>
+    </div>
+  </div>
+  <div class="more-row">
+    <a class="more-link" href="unit2-part2-bending-and-shear-stress.html">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- 05 DEFLECTION -->
+<section class="section" id="deflection">
+  <div class="section-head"><span class="index">05</span><h2>Deflection</h2><span class="rule"></span></div>
+  <div class="grid-2 rev">
+    <div class="copy">
+      <p>Stress tells you whether a member breaks. Deflection tells you whether it's still usable — a floor beam can be well within its stress limit and still feel unacceptably springy. Deflection is governed by the curvature of the beam, which is proportional to the bending moment.</p>
+      <div class="formula-card">
+        <div class="name">Beam Curvature</div>
+        <div class="eq">EI · d²v/dx² = M(x)</div>
+        <div class="terms">integrated twice, with boundary conditions, to get slope and deflection</div>
+      </div>
+      <div class="formula-card">
+        <div class="name">Cantilever, End Point Load</div>
+        <div class="eq">δ<sub>max</sub> = PL³ / (3EI)</div>
+        <div class="terms">at the free end &nbsp; — one of the standard tabulated cases</div>
+      </div>
+      <p class="small">Common methods: double integration, superposition of tabulated cases, moment-area, and Castigliano's theorem.</p>
+    </div>
+    <div class="diagram">
+      <svg viewBox="0 0 380 200" aria-label="Cantilever beam fixed at one end deflecting downward under an end point load">
+        <rect x="20" y="40" width="20" height="120" fill="#333333"/>
+        <line x1="40" y1="90" x2="330" y2="90" stroke="#333333" stroke-width="2" stroke-dasharray="4 4"/>
+        <path d="M40,90 C 150,92 250,100 330,155" fill="none" stroke="#e85d2c" stroke-width="2.5"/>
+        <line x1="330" y1="155" x2="330" y2="120" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow5)"/>
+        <defs><marker id="arrow5" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
+        <text x="336" y="115" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
+        <line x1="330" y1="90" x2="330" y2="155" stroke="#3fa9a4" stroke-width="1" stroke-dasharray="2 2"/>
+        <text x="335" y="180" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">δmax</text>
+      </svg>
+      <div class="cap"><span>CANTILEVER DEFLECTION</span><span>δ = PL³/3EI</span></div>
+    </div>
+  </div>
+  <div class="more-row">
+    <a class="more-link" href="#">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- 06 TORSION -->
 <section class="section" id="torsion">
-  <div class="section-head"><span class="index">04</span><h2>Torsion</h2><span class="rule"></span></div>
+  <div class="section-head"><span class="index">06</span><h2>Torsion</h2><span class="rule"></span></div>
   <div class="grid-2">
     <div class="diagram">
       <svg viewBox="0 0 380 200" aria-label="Circular shaft under torque showing shear stress distribution and angle of twist">
@@ -626,75 +714,11 @@
       <p class="small">For a solid circular section, J = πr⁴/2. For a hollow tube, J = π(r<sub>o</sub>⁴ − r<sub>i</sub>⁴)/2.</p>
     </div>
   </div>
-</section>
-
-<!-- 05 BENDING STRESS -->
-<section class="section" id="bending-stress">
-  <div class="section-head"><span class="index">05</span><h2>Bending Stress</h2><span class="rule"></span></div>
-  <div class="grid-2">
-    <div class="diagram">
-      <svg viewBox="0 0 380 210" aria-label="Beam cross section showing linear bending stress distribution, tension below neutral axis and compression above">
-        <rect x="60" y="30" width="70" height="140" fill="none" stroke="#444444" stroke-width="2"/>
-        <line x1="60" y1="100" x2="130" y2="100" stroke="#333333" stroke-width="1" stroke-dasharray="3 3"/>
-        <text x="132" y="104" font-family="IBM Plex Mono" font-size="9" fill="#333333">N.A.</text>
-        <line x1="180" y1="30" x2="280" y2="30" stroke="#3fa9a4" stroke-width="1"/>
-        <line x1="180" y1="100" x2="180" y2="100" stroke="#3fa9a4" stroke-width="1"/>
-        <line x1="180" y1="170" x2="280" y2="170" stroke="#e85d2c" stroke-width="1"/>
-        <path d="M180,100 L260,35" stroke="#3fa9a4" stroke-width="2" fill="none"/>
-        <path d="M180,100 L260,165" stroke="#e85d2c" stroke-width="2" fill="none"/>
-        <line x1="180" y1="30" x2="180" y2="170" stroke="#333333" stroke-width="1"/>
-        <text x="245" y="45" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">compression</text>
-        <text x="255" y="185" font-family="IBM Plex Mono" font-size="9" fill="#e85d2c">tension</text>
-      </svg>
-      <div class="cap"><span>LINEAR STRESS DISTRIBUTION</span><span>σ = My/I</span></div>
-    </div>
-    <div class="copy">
-      <p>A beam in pure bending develops compressive stress on one side of the cross-section and tensile stress on the other, with a linear transition through an unstressed <b style="color:var(--text)">neutral axis</b>. Stress is highest at the outer fibers — which is why I-beams put most of their material as far from the neutral axis as possible.</p>
-      <div class="formula-card">
-        <div class="name">Flexure Formula</div>
-        <div class="eq">σ = M·y / I</div>
-        <div class="terms"><b>M</b> bending moment &nbsp; <b>y</b> distance from neutral axis &nbsp; <b>I</b> moment of inertia</div>
-      </div>
-      <div class="formula-card">
-        <div class="name">Horizontal Shear Stress in Beams</div>
-        <div class="eq">τ = V·Q / (I·b)</div>
-        <div class="terms"><b>Q</b> first moment of area above the cut &nbsp; <b>b</b> width at the cut</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 06 DEFLECTION -->
-<section class="section" id="deflection">
-  <div class="section-head"><span class="index">06</span><h2>Deflection</h2><span class="rule"></span></div>
-  <div class="grid-2 rev">
-    <div class="copy">
-      <p>Stress tells you whether a member breaks. Deflection tells you whether it's still usable — a floor beam can be well within its stress limit and still feel unacceptably springy. Deflection is governed by the curvature of the beam, which is proportional to the bending moment.</p>
-      <div class="formula-card">
-        <div class="name">Beam Curvature</div>
-        <div class="eq">EI · d²v/dx² = M(x)</div>
-        <div class="terms">integrated twice, with boundary conditions, to get slope and deflection</div>
-      </div>
-      <div class="formula-card">
-        <div class="name">Cantilever, End Point Load</div>
-        <div class="eq">δ<sub>max</sub> = PL³ / (3EI)</div>
-        <div class="terms">at the free end &nbsp; — one of the standard tabulated cases</div>
-      </div>
-      <p class="small">Common methods: double integration, superposition of tabulated cases, moment-area, and Castigliano's theorem.</p>
-    </div>
-    <div class="diagram">
-      <svg viewBox="0 0 380 200" aria-label="Cantilever beam fixed at one end deflecting downward under an end point load">
-        <rect x="20" y="40" width="20" height="120" fill="#333333"/>
-        <line x1="40" y1="90" x2="330" y2="90" stroke="#333333" stroke-width="2" stroke-dasharray="4 4"/>
-        <path d="M40,90 C 150,92 250,100 330,155" fill="none" stroke="#e85d2c" stroke-width="2.5"/>
-        <line x1="330" y1="155" x2="330" y2="120" stroke="#e85d2c" stroke-width="1.5" marker-end="url(#arrow5)"/>
-        <defs><marker id="arrow5" markerWidth="6" markerHeight="6" refX="5" refY="5" orient="auto"><path d="M0,0 L6,0 L3,6 z" fill="#e85d2c"/></marker></defs>
-        <text x="336" y="115" font-family="IBM Plex Mono" font-size="10" fill="#e85d2c">P</text>
-        <line x1="330" y1="90" x2="330" y2="155" stroke="#3fa9a4" stroke-width="1" stroke-dasharray="2 2"/>
-        <text x="335" y="180" font-family="IBM Plex Mono" font-size="9" fill="#3fa9a4">δmax</text>
-      </svg>
-      <div class="cap"><span>CANTILEVER DEFLECTION</span><span>δ = PL³/3EI</span></div>
-    </div>
+  <div class="more-row">
+    <a class="more-link" href="#">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
   </div>
 </section>
 
@@ -729,6 +753,12 @@
       <p class="small">The center of the circle sits at the average normal stress; every point on the circle represents the stress state on some plane through the material.</p>
     </div>
   </div>
+  <div class="more-row">
+    <a class="more-link" href="#">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 </section>
 
 <!-- 08 FAILURE THEORIES -->
@@ -748,6 +778,12 @@
       <tr><td>Mohr's Failure Criterion</td><td>Brittle materials, unequal T/C strength</td><td class="mono">envelope from tension &amp; compression tests</td></tr>
     </tbody>
   </table>
+  <div class="more-row">
+    <a class="more-link" href="#">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
+  </div>
 </section>
 
 <!-- PROBLEM-SOLVING PROCESS -->
@@ -832,6 +868,12 @@
         <p>Strength isn't the only requirement. If the member also has a stiffness or deflection limit, integrate the curvature equation or use a tabulated case to confirm deflection stays within what's allowed.</p>
       </div>
     </div>
+  </div>
+  <div class="more-row">
+    <a class="more-link" href="#">
+      More…
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </a>
   </div>
 </section>
 
